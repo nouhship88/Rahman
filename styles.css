@@ -369,7 +369,7 @@ background: linear-gradient(90deg, #68A5A2, #A0D5D1);
     }
   
     form button:hover {
-      background-color: #c0392b;
+      background-color: #465a5a;
       transform: scale(1.05);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
