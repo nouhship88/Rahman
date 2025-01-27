@@ -86,13 +86,13 @@
   #countdown span {
     font-size: 2em; /* Adjust the font size for all spans */
     font-weight: bold; /* Make text bold */
-    color: #c5cda7    ; /* Set color for all spans */
+    color: #AFA577    ; /* Set color for all spans */
     margin: 0 5px; /* Add spacing between spans */
   }
   
   #countdown .time-unit {
     font-size: 1.2em; /* Slightly smaller size for time units */
-    color: #c5cda7 ; /* Color for time units */
+    color: #AFA577 ; /* Color for time units */
   }
   
   /* Display Section */
