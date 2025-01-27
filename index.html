@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="أوقات الصلاة والطقس في مسجد الرحمن غريان"
+    />
+    <meta
+      name="keywords"
+      content="مسجد  غريان, أوقات الصلاة, الطقس, غريان, رمضان ليبيا, العد التنازلي"
+    />
+    <meta property="og:image" content="logo.png" />
+    <title>مسجد ٱلرَّحمٰن - غريان</title>
+    <meta name="developer" content="Noah Shanta">
+     <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="logo.png" type="image/x-icon" />
+    <div data-aos="fade-up"></div>
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+
+  <body>
+    <header>
+      <div class="header-container">
+        <!-- Logo on the top center for phone sizes -->
+        <img src="logo.png" alt="Logo" class="header-logo" />
+        <div class="header-text">
+          <h1>مسجد الرَّحمٰن بمدينة غريان</h1>
+          <p>أوقات الصلاة والتحديثات الجوية المحلية</p>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#prayer-times">أوقات الصلاة</a>
+      <a href="#weather">الطقس</a>
+      <a href="#contact">اتصل بنا</a>
+      <a href="imsakia.html">إمساكية رمضان</a>
+    </nav>
+    
+    <!-- Ramadan Countdown Section -->
+    <section>
+    <div class="container" >
+      <section class="ramadan-countdown">
+        <h2>العد التنازلي لشهر رمضان المبارك</h2>
+        <div id="countdown">
+          <span class="days"></span><span class="time-unit">يوم</span>
+          <span class="hours"></span><span class="time-unit">ساعة</span>
+          <span class="minutes"></span><span class="time-unit">دقيقة</span>
+          <span class="seconds"></span><span class="time-unit">ثانية</span>
+        </div>
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <p>اللهم بلغنا رمضان وبارك لنا فيه وارزقنا صيامه وقيامه</p>
+      </section>
+
+      
+      <!-- Prayer Times Display Section -->
+      <section class="prayer-times-display" id="prayer-times" data-aos="zoom-in" data-aos-duration="1000">
+        <h2>  أوقات الصلاة والإقامة</h2>
+        <iframe
+          src="https://mosqueprayertimes.com/al-rahmanmosque"
+          allowfullscreen
+        ></iframe>
+      </section>
+
+
+      <section class="section" id="weather">
+        <div class="container">
+          <div class="weather">
+            <div class="weather-header"  data-aos="fade-up">
+              <h2 id="city-name">   </h2> <!-- Set the title for Gharyan -->
+            </div>
+            <div class="weather-item"  data-aos="flip-left">
+              <h2>الحرارة</h2>
+              <span id="temperature"></span>°C
+            </div>
+            <!-- <div class="weather-item">
+              <h2>الرياح</h2>
+              <span id="wind"></span> m/s
+            </div> -->
+            <div class="weather-item"  data-aos="flip-left">
+              <h2>الإحساس بالحرارة</h2>
+              <span id="feels-like"></span>°C
+            </div>
+            <div class="weather-item"  data-aos="flip-left">
+              <h2>الرطوبة</h2>
+              <span id="humidity"></span>%
+            </div>
+            <div class="weather-item"  data-aos="flip-left">
+              <h2>الوصف</h2>
+              <span id="description"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="videos">
+        <div class="section-title">
+          <h2>فيديوهات مميزة</h2>
+        </div>
+        <div class="video-container">
+          <video controls width="100%" poster="video-thumbnail.jpg">
+            <source src="rahman.mp4" type="video/mp4" />
+            <source src="ramadan.ogg" type="video/ogg" />
+            متصفحك لا يدعم تشغيل الفيديو.
+          </video>
+          <p class="video-description">
+            اختتام دورة الكنوز الأثرية بمسجد الرحمن  
+            بحضور قرابة 600 طالب </p>
+        </div>
+      </section>
+      
+      
+      <section>
+        <div class="section-title">
+          <h2>الإعلانات والأحداث القادمة</h2>
+        </div>
+        <div class="events">
+          <div class="event">
+            <h3>دورة تعليمية جديدة</h3>
+            <p>
+              سيتم تنظيم دورات تعليمية حول القرآن الكريم في مسجد الرحمن قريبًا.
+              
+            </p>
+            <span class="event-date">التاريخ: 1 مارس 2025</span>
+          </div>
+          <div class="event">
+            <h3>محاضرات دينية</h3>
+            <p>
+              سيتم قريبًا تنظيم محاضرات دينية يومية بعد صلاة الظهر في مسجدنا،
+              فرصة رائعة للتعلم والتفقه في الدين.!
+            </p>
+            <span class="event-date">التاريخ: 2 مارس 2025</span>
+          </div>
+          <div class="event">
+            <h3>إفطار جماعي في رمضان</h3>
+            <p>
+              سينظم مسجد الرحمن إفطارًا جماعيًا خلال شهر رمضان المبارك, نرجو من
+              الجميع الحضور والمشاركة في الأجواء الرمضانية.
+            </p>
+            <span class="event-date">التاريخ: 1 مارس 2025</span>
+          </div>
+        </div>
+      </section>
+ 
+
+      <section class="section" id="contact">
+        <form action="https://formspree.io/f/xjkggzbb" method="POST">
+          <h2>اتصل بنا</h2>
+          <label>
+            بريدك الالكتروني:
+            <input type="email" name="email">
+          </label>
+          <label>
+            اكتب رسالتك هنا:
+            <textarea name="message"></textarea>
+          </label>
+          <button type="submit">أرسل</button>
+        </form>
+      </section>
+    </div>
+
+    <footer>
+
+      <p>جميع خدمات الموقع مجانية، وإذا أعجبك، فلا تنسَ الدعاء لوالديّ.</p>
+      <p>© جميع الحقوق محفوظة - مسجد الرحمن غريان</p> 
+       </footer>
+       <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+       <script>
+         AOS.init();
+       </script>
+       
+       <script src="script.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="إمساكية رمضان للمسجد" />
+    <meta
+      name="keywords"
+      content="إمساكية رمضان, غريان, أوقات الصلاة, رمضان ليبيا"
+    />
+    <meta property="og:image" content="logo.png" />
+    <title>إمساكية رمضان</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="logo.png" type="image/x-icon" />
+    <style>
+      /* General Styles */
+      body {
+        font-family: "Cairo", sans-serif;
+        background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+        color: #f9f9f9;
+        text-align: right;
+        direction: rtl;
+        margin: 0;
+        padding: 0;
+      }
+
+      body.light-mode {
+        background: linear-gradient(to bottom, #f9f9f9, #e8e8e8);
+        color: #2c3e50;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        background: url("mosque-bg-dark.jpg") no-repeat center center/cover;
+        color: #f9f9f9;
+      }
+
+      .header-logo {
+        width: 90px;
+        height: auto;
+        display: block;
+      }
+
+      body.light-mode header {
+        background: url("mosque-bg-light.jpg") no-repeat center center/cover;
+        color: #34495e;
+      }
+
+      header h1,
+      header h2 {
+        margin: 10px 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      body.light-mode header h1,
+      body.light-mode header h2 {
+        text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+      }
+
+      header h1 {
+        font-size: 3em;
+      }
+
+      header h2 {
+        font-size: 1.8em;
+      }
+
+      /* Button */
+      .toggle-dark-mode {
+        margin: 10px 0;
+        padding: 10px 15px;
+        font-size: 1em;
+        font-family: "Cairo", sans-serif;
+        font-weight: bold;
+        background-color: #f39c12;
+        color: #121212;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .toggle-dark-mode:hover {
+        background-color: #34495e;
+        color: #fff;
+      }
+
+      /* Ramadan Timetable */
+      .ramadan-timetable {
+        margin: 40px auto;
+        text-align: center;
+        max-width: 1000px;
+        width: 100%;
+      }
+
+      .ramadan-timetable h2 {
+        font-size: 2em;
+        color: #f39c12;
+        margin-bottom: 20px;
+      }
+
+      body.light-mode .ramadan-timetable h2 {
+        color: #e74c3c;
+      }
+
+      .ramadan-timetable table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #2c3e50;
+        color: #f9f9f9;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      body.light-mode .ramadan-timetable table {
+        background-color: #ffffff;
+        color: #2c3e50;
+      }
+
+      .ramadan-timetable table th,
+      .ramadan-timetable table td {
+        padding: 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+        font-size: 1.1em;
+      }
+
+      .ramadan-timetable table th {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      body.light-mode .ramadan-timetable table th {
+        background-color: #34495e;
+        color: white;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #34495e;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+        border-top: 4px solid #e74c3c;
+      }
+
+      body.light-mode footer {
+        background-color: #f9f9f9;
+        color: #2c3e50;
+      }
+
+      /* Eid Prayer */
+      .eid-prayer {
+        margin-top: 30px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #edeff1;
+      }
+
+      body.light-mode .eid-prayer {
+        color: #34495e;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        header {
+          padding: 10px 15px;
+          background-position: top center;
+        }
+
+        header h1 {
+          font-size: 2em;
+        }
+
+        header h2 {
+          font-size: 1.2em;
+        }
+
+        .toggle-dark-mode {
+          font-size: 0.9em;
+          padding: 8px 12px;
+        }
+
+        .ramadan-timetable table th,
+        .ramadan-timetable table td {
+          padding: 10px;
+          font-size: 0.9em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header {
+          padding: 10px 10px;
+          background-position: center top;
+        }
+
+        header h1 {
+          font-size: 1.5em;
+        }
+
+        header h2 {
+          font-size: 1em;
+        }
+
+        .toggle-dark-mode {
+          font-size: 0.8em;
+          padding: 6px 10px;
+        }
+      }
+
+      /* Top link styling */
+.back-home-link {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #333;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #f1f1f1;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.back-home-link:hover {
+  background-color: #ddd;
+}
+
+/* Bottom button styling */
+.go-home-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #f39c12;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.go-home-button:hover {
+  background-color: #45a049;
+}
+
+    </style>
+  </head>
+  <body class="light-mode">
+    <!-- Header -->
+    <header>
+      <img src="logo.png" alt="Logo" class="header-logo" />
+      <h1>مسجد الرَّحمٰن بمدينة غريان</h1>
+      <h2>إمساكية شهر رمضان المبارك - لسنة 2025</h2>
+      <h3>"كل عام وانتم بخير"</h3>
+      <button class="toggle-dark-mode">تبديل وضع النهار/الليل</button>
+    </header>
+
+    <!-- Ramadan Timetable Section -->
+    <section class="ramadan-timetable">
+      <table>
+        <thead>
+          <tr>
+            <th>اليوم</th>
+             <th>وقت الفجر</th>
+            <th>وقت الظهر</th>
+            <th>وقت العصر</th>
+            <th>وقت المغرب</th>
+            <th>وقت العشاء</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data will be populated here -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Eid Prayer Note -->
+    <section class="eid-prayer">
+      <p>ملاحظة: سيتم الإعلان عن موعد صلاة العيد لاحقاً بمشيئة الله تعالى!</p>
+      <a href="index.html" class="go-home-button">العودة إلى الصفحة الرئيسية</a> <!-- Button to Home Page -->
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 مسجد الرَّحمٰن  غريان | جميع الحقوق محفوظة</p>
+      
+    </footer>
+
+    <script>
+      const toggleButton = document.querySelector(".toggle-dark-mode");
+const body = document.body;
+const logo = document.querySelector(".header-logo");
+
+toggleButton.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+  body.classList.toggle("light-mode");
+
+  // Change logo based on mode
+  if (body.classList.contains("light-mode")) {
+    logo.src = "logo.png";  // Change to light mode logo
+  } else {
+    logo.src = "logo.png";  // Change to dark mode logo
+  }
+});
+
+      const imsakiaAPI =
+        "https://api.aladhan.com/v1/calendarByCity?city=Gharyan&country=Libya&method=2&month=3&year=2025";
+
+      fetch(imsakiaAPI)
+        .then((response) => response.json())
+        .then((data) => {
+          const tbody = document.querySelector(".ramadan-timetable tbody");
+          tbody.innerHTML = ""; // Clear existing data
+          data.data.forEach((day, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${index + 1} رمضان</td>
+              <td>${day.timings.Fajr}</td>
+              <td>${day.timings.Dhuhr}</td>
+              <td>${day.timings.Asr}</td>
+              <td>${day.timings.Maghrib}</td>
+              <td>${day.timings.Isha}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        })
+        .catch((error) => console.error("Error fetching Imsakia data:", error));
+    </script>
+  </body>
+</html>

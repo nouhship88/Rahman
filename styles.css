@@ -1,0 +1,618 @@
+ 
+/* General styles */
+/* General styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Cairo", sans-serif;
+    background: #FFFFFF ;
+    color: #2C3E50 ;
+    text-align: right;
+    direction: rtl;
+  }
+  
+  header {
+    background-color: #F4F4F4   ;
+    color: 2C3E50 ;
+    padding: 20px 0;
+    border-bottom: 4px solid #D2B359   ;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .header-logo {
+    width: 90px;
+    height: auto;
+    display: block;
+  }
+  
+  .header-text {
+    text-align: center;
+    flex: 1;
+  }
+  
+  header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+  }
+  
+  header p {
+    font-size: 1.2em;
+  }
+  
+  nav {
+    background-color: #F4F4F4 ;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  nav a {
+    color: #2C3E50 ;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 1.3em;
+  }
+  
+  nav a:hover {
+    color: #e74c3c;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 22px;
+  }
+  
+  #countdown span {
+    font-size: 2em; /* Adjust the font size for all spans */
+    font-weight: bold; /* Make text bold */
+    color: #c5cda7    ; /* Set color for all spans */
+    margin: 0 5px; /* Add spacing between spans */
+  }
+  
+  #countdown .time-unit {
+    font-size: 1.2em; /* Slightly smaller size for time units */
+    color: #c5cda7 ; /* Color for time units */
+  }
+  
+  /* Display Section */
+  .prayer-times-display {
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 10px;
+    background-color: #ECF0F1;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  body.light-mode .prayer-times-display {
+    background-color: rgba(249, 249, 249, 0.9);
+    color: #34495e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .prayer-times-display h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: 2C3E50;
+  }
+  
+  body.light-mode .prayer-times-display h2 {
+    color: #e74c3c;
+  }
+  
+  .prayer-times-display iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  
+  
+  .events {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .event h3 {
+    font-size: 1.5em;
+    color: #34495e;
+  }
+  
+  .event p {
+    font-size: 1.1em;
+    color: #7f8c8d;
+  }
+  
+  .event-date {
+    display: block;
+    margin-top: 10px;
+    font-size: 1em;
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .section-title h2 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+  
+  /* Container for the weather section */
+   
+    
+    /* Weather Container */
+    .weather {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f9f9f9;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      color: #34495e;
+    }
+    
+    /* Weather Item */
+    .weather-item {
+      text-align: center;
+      flex: 1;
+      padding: 15px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+    }
+    
+    .weather-item h2 {
+      color: #34495e;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    .weather-item span {
+      font-size: 1.6em;
+      color: #e74c3c;
+      font-weight: 600;
+    }
+    
+    /* Hover effect for weather items */
+    .weather-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Weather Header */
+    .weather-header {
+      background-color: #68A5A2   ;
+      padding: 15px;
+      color: white;
+      font-size: 1.8em;
+      font-weight: bold;
+      text-align: center;
+      z-index: 10;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Media Query for tablets and smaller screens */
+    @media (max-width: 1024px) {
+      .weather {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns for weather items */
+        gap: 20px;
+        padding: 20px;
+      }
+    
+      /* Weather items become 100% width in a grid */
+      .weather-item {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    
+      /* Title stays centered */
+      .weather-header {
+        grid-column: span 2;
+        margin-bottom: 20px;
+      }
+    }
+    
+    /* For smaller mobile screens */
+    @media (max-width: 768px) {
+      .weather {
+        grid-template-columns: 1fr; /* Single column layout for very small screens */
+      }
+    
+      /* Full width for weather items */
+      .weather-item {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    
+      /* Adjust the font sizes for better readability on small devices */
+      .weather-header h2 {
+        font-size: 1.6em;
+      }
+    
+      .weather-item h2 {
+        font-size: 1.2em;
+      }
+    
+      .weather-item span {
+        font-size: 1.4em;
+      }
+    }
+    
+    
+    @media (max-width: 768px) {
+      .weather {
+        grid-template-columns: 1fr; /* Single column layout for very small screens */
+      }
+    
+      /* Full width for weather items */
+      .weather-item {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    
+      /* Adjust the font sizes for better readability on small devices */
+      .weather-header h2 {
+        font-size: 1.6em;
+      }
+    
+      .weather-item h2 {
+        font-size: 1.2em;
+      }
+    
+      .weather-item span {
+        font-size: 1.4em;
+      }
+    }
+    
+  @media (max-width: 1024px) {
+    .weather {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two columns for weather items */
+      gap: 20px;
+      padding: 20px;
+    }
+  
+    /* Weather items become 100% width in a grid */
+    .weather-item {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  
+    /* Title stays centered */
+    .weather-header {
+      grid-column: span 2;
+      margin-bottom: 20px;
+    }
+  }
+    
+  
+  form {
+       padding: 30px;
+      border-radius: 15px;
+background: linear-gradient(90deg, #68A5A2, #A0D5D1);
+      direction: rtl;
+      max-width: 600px;
+      margin: 30px auto;
+    }
+  
+    form h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: #fff;
+      text-align: center;
+    }
+  
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+    }
+  
+    form input:focus,
+    form textarea:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+  
+    form button {
+      width: 100%;
+      padding: 15px;
+      background-color: #2F4F4F;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  
+    form button:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+  
+  
+  
+  /* Global Footer styles */
+  footer {
+    background-color: #ECF0F1;
+    color: 2C3E50;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.1em;
+    border-top: 4px solid #D2B359;
+  }
+  
+  footer p {
+    margin: 0;
+  }
+  
+  footer a {
+    color: #e74c3c;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .header-logo {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+  
+    .header-text h1 {
+      font-size: 1.8em;
+    }
+  
+    .header-text p {
+      font-size: 1.1em;
+    }
+  
+    .section-title h2 {
+      font-size: 35px;
+      margin-bottom: 6px;
+    }
+  
+  
+    nav a {
+      font-size: 1.1em;
+      margin: 0 10px;
+    }
+  
+  
+    footer p {
+      font-size: 0.9em;
+    }
+  
+    /* Footer adjustments */
+    footer {
+      padding: 15px 0;
+      font-size: 14px;
+    }
+  
+   
+    /* Ramadan Countdown adjustments */
+    .ramadan-countdown h2 {
+      font-size: 1.5em;
+    }
+  
+    .countdown-timer {
+      font-size: 1.8em;
+    }
+  
+    .progress-bar {
+      height: 12px;
+    }
+  
+    .progress {
+      height: 100%;
+      background-color: #f39c12;
+    }
+  
+    form {
+      padding: 20px;
+      margin-top: 30px;
+    }
+  
+    form input,
+    form textarea {
+      padding: 12px;
+    }
+  
+    form button {
+      padding: 12px;
+    }
+  
+    
+  
+  }
+  
+  /* Ramadan Countdown styles */
+  .ramadan-countdown {
+    background-color: #ECF0F1  ;
+    color: #2C3E50 ;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: "Cairo", sans-serif;
+    margin-bottom: 40px;
+  }
+  
+  .ramadan-countdown h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+  
+  .countdown-timer {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #f39c12;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #34495E;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background-color: #D2B359;
+    box-shadow: 0 0 15px #D2B359; /* Neon glow effect */
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+
+  
+  /* Ramadan Timetable styles */
+  .ramadan-timetable {
+    margin: 40px auto;
+    text-align: center;
+    font-family: "Cairo", sans-serif;
+  }
+  
+  .ramadan-timetable h2 {
+    font-size: 2em;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
+  
+  .ramadan-timetable table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .ramadan-timetable table th,
+  .ramadan-timetable table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 1.1em;
+  }
+  
+  .ramadan-timetable table th {
+    background-color: #e74c3c;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .ramadan-timetable table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* AOS Animations */
+  [data-aos="fade-up"] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    [data-aos="fade-up"].aos-animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    [data-aos="zoom-in"] {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    [data-aos="zoom-in"].aos-animate {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    [data-aos="flip-left"] {
+      opacity: 0;
+      transform: rotateY(-90deg);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    [data-aos="flip-left"].aos-animate {
+      opacity: 1;
+      transform: rotateY(0);
+    }
+    
+    #videos {
+        margin: 2rem 0;
+        text-align: center;
+      }
+      
+      .video-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1rem;
+      }
+      
+      .video-container video {
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .video-description {
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: #555;
+      }
+      
