@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الطقس في مدينة غريان</title>
+    <meta
+      name="description"
+      content=" الطقس في غريان - غريان"
+    />
+    <meta name="keywords" content=" غريان - درجة الحرارة غريان - غريان,  الطقس في غريان, توقعات الطقس غريان, طقس اليوم" />
+    <meta name="robots" content="index, follow" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans Arabic", sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+        direction: rtl;
+        padding-top: 50px;
+        transition: background-color 0.3s ease;
+      }
+
+      header {
+        background-color: #3498db;
+        color: #fff;
+        padding: 30px 0;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-family: "Amiri", serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        font-style: italic;
+      }
+      header a {
+        color: rgb(91, 91, 167);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: center;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+      }
+
+      .weather-info {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 30px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .weather-info h2 {
+        font-size: 2.2rem;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .temperature {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #3498db;
+        margin-top: 10px;
+      }
+
+      .weather-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .weather-detail-card {
+        background-color: #ecf0f1;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 1.1rem;
+        color: #2c3e50;
+      }
+
+      .weather-detail-card p {
+        margin: 10px 0;
+      }
+
+      .weather-detail-card span {
+        font-weight: 700;
+        display: block;
+        margin-top: 5px;
+      }
+
+      .hourly-forecast {
+        display: grid;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .hourly-card {
+        background-color: #ecf0f1;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .hourly-card img {
+        width: 40px;
+        height: 40px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        background-color: #3498db;
+        color: #fff;
+        border-radius: 0 0 15px 15px;
+        margin-top: 30px;
+      }
+
+      /* Keyframe animation for fading in the weather info */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>الطقس في مدينة غريان هذه اللحظة</h1>
+      <p>الطقس لحظة بلحظة</p>
+      <a href="index.html" class="go-home-button">العودة إلى الصفحة الرئيسية</a>
+      <!-- Button to Home Page -->
+    </header>
+
+    <div class="container">
+      <!-- Current Weather Section -->
+      <div class="weather-info" id="weather-info">
+        <h2 id="city-name">جاري التحميل...</h2>
+        <div class="temperature" id="temperature">--°C</div>
+        <div class="description" id="description">--</div>
+
+        <div class="weather-details">
+          <div class="weather-detail-card">
+            <h3>الرطوبة</h3>
+            <p id="humidity">--</p>
+            <span>%</span>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>الرياح</h3>
+            <p id="wind">--</p>
+            <span>م/ث</span>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>اتجاه الرياح</h3>
+            <p id="wind-dir">--</p>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>الضغط</h3>
+            <p id="pressure">--</p>
+            <span>hPa</span>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>الرؤية</h3>
+            <p id="visibility">--</p>
+            <span>متر</span>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>السحب</h3>
+            <p id="cloudiness">--</p>
+            <span>%</span>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>الشروق</h3>
+            <p id="sunrise">--</p>
+          </div>
+
+          <div class="weather-detail-card">
+            <h3>الغروب</h3>
+            <p id="sunset">--</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hourly Forecast Section -->
+      <div class="section-title">التوقعات للساعات القادمة</div>
+
+      <div class="hourly-forecast" id="hourly-forecast">
+        <!-- Hourly data will be inserted here -->
+      </div>
+    </div>
+
+    <footer>
+      <p>© جميع الحقوق محفوظة - مسجد الرحمن غريان</p>
+    </footer>
+
+    <script>
+      const apiKey = "57a90be8cde9f71447e17cb16a34739a"; // Replace with your OpenWeather API key
+      const lat = "32.163153161341"; // Latitude of the city
+      const lon = "13.016516217700751"; // Longitude of the city
+
+      // Function to get current weather
+      async function getWeather() {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ar`;
+        const response = await fetch(url);
+        const data = await response.json();
+        displayWeather(data);
+      }
+
+      // Function to display current weather
+      function displayWeather(data) {
+        const cityName = document.getElementById("city-name");
+        const temperature = document.getElementById("temperature");
+        const description = document.getElementById("description");
+        const humidity = document.getElementById("humidity");
+        const wind = document.getElementById("wind");
+        const windDir = document.getElementById("wind-dir");
+        const pressure = document.getElementById("pressure");
+        const visibility = document.getElementById("visibility");
+        const cloudiness = document.getElementById("cloudiness");
+        const sunrise = document.getElementById("sunrise");
+        const sunset = document.getElementById("sunset");
+
+        cityName.textContent = data.name;
+        temperature.textContent = `${data.main.temp}°C`;
+        description.textContent = data.weather[0].description;
+        humidity.textContent = data.main.humidity;
+        wind.textContent = data.wind.speed;
+        windDir.textContent = getWindDirection(data.wind.deg);
+        pressure.textContent = data.main.pressure;
+        visibility.textContent = data.visibility;
+        cloudiness.textContent = data.clouds.all;
+        sunrise.textContent = convertUnixTime(data.sys.sunrise);
+        sunset.textContent = convertUnixTime(data.sys.sunset);
+      }
+
+      // Function to get hourly forecast
+      async function getHourlyForecast() {
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ar`;
+        const response = await fetch(url);
+        const data = await response.json();
+        displayHourlyForecast(data);
+      }
+
+      // Function to display hourly forecast
+      function displayHourlyForecast(data) {
+        const hourlyForecast = document.getElementById("hourly-forecast");
+        hourlyForecast.innerHTML = ""; // Clear previous data
+
+        data.list.slice(0, 12).forEach((hour) => {
+          const hourCard = document.createElement("div");
+          hourCard.classList.add("hourly-card");
+
+          const time = convertUnixTime(hour.dt); // Use the updated time function
+          const temp = `${hour.main.temp}°C`;
+          const description = hour.weather[0].description;
+          const icon = `https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`;
+
+          hourCard.innerHTML = `
+      <h4>${time}</h4>
+      <img src="${icon}" alt="${description}">
+      <p>${temp}</p>
+      <p>${description}</p>
+    `;
+
+          hourlyForecast.appendChild(hourCard);
+        });
+      }
+
+      // Function to get wind direction based on degrees
+      function getWindDirection(deg) {
+        if (deg >= 0 && deg < 45) return "شمالي";
+        if (deg >= 45 && deg < 90) return "شمالي شرقي";
+        if (deg >= 90 && deg < 135) return "شرقي";
+        if (deg >= 135 && deg < 180) return "جنوبي شرقي";
+        if (deg >= 180 && deg < 225) return "جنوبي";
+        if (deg >= 225 && deg < 270) return "جنوبي غربي";
+        if (deg >= 270 && deg < 315) return "غربي";
+        return "شمالي غربي";
+      }
+
+      // Function to convert Unix timestamp to time format (12-hour format with AM/PM in Arabic)
+      function convertUnixTime(unixTime) {
+        const date = new Date(unixTime * 1000);
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        const ampm = hours >= 12 ? "م" : "ص"; // Arabic AM/PM
+        hours = hours % 12; // Convert to 12-hour format
+        hours = hours ? hours : 12; // 0 should be 12
+        minutes = minutes < 10 ? "0" + minutes : minutes; // Add leading zero for minutes if needed
+        return `${hours}:${minutes} ${ampm}`;
+      }
+
+      // Initial function calls
+      getWeather();
+      getHourlyForecast();
+    </script>
+  </body>
+</html>
