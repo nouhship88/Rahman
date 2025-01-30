@@ -62,6 +62,7 @@
     margin: 0 20px;
     text-decoration: none;
     font-size: 1.3em;
+    text-decoration: underline;
   }
   
   nav a:hover {
@@ -406,7 +407,7 @@ background: linear-gradient(90deg, #68A5A2, #A0D5D1);
     }
   
     .header-logo {
-      width: 80px;
+      width: 100px;
       margin-bottom: 15px;
     }
   
@@ -500,13 +501,14 @@ background: linear-gradient(90deg, #68A5A2, #A0D5D1);
     color: #f39c12;
   }
   
-  .progress-bar {
+.progress-bar {
     width: 100%;
     height: 20px;
     background-color: #34495E;
     border-radius: 10px;
     margin-top: 20px;
-    overflow: hidden;
+    position: relative;
+    overflow: visible;
 }
 
 .progress {
@@ -518,6 +520,32 @@ background: linear-gradient(90deg, #68A5A2, #A0D5D1);
     transition: width 1s ease;
 }
 
+.progress-marker {
+    position: absolute;
+    top: -10px;
+    width: 2px;
+    height: 30px;
+    background-color: #34495E;
+    z-index: 1;
+}
+
+.progress-marker::after {
+    content: attr(data-label);
+    position: absolute;
+    top: -25px;
+    left: -10px;
+    font-size: 0.8em;
+    color: #34495E;
+}
+
+.progress-marker:nth-child(1) { left: 25%; }
+.progress-marker:nth-child(1)::after { content: '25%'; }
+
+.progress-marker:nth-child(2) { left: 50%; }
+.progress-marker:nth-child(2)::after { content: '50%'; }
+
+.progress-marker:nth-child(3) { left: 75%; }
+.progress-marker:nth-child(3)::after { content: '75%'; }
 
   
   /* Ramadan Timetable styles */
@@ -615,4 +643,66 @@ background: linear-gradient(90deg, #68A5A2, #A0D5D1);
         font-size: 1rem;
         color: #555;
       }
-      
+      /* Quote Card */
+.quote-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #d4af37; /* Gold border */
+  text-align: center;
+}
+
+/* Quote Text */
+.quote-text {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Quote Source */
+.quote-source {
+  font-size: 1rem;
+  color: #777;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .quote-text {
+    font-size: 1.2rem;
+  }
+  .quote-source {
+    font-size: 0.9rem;
+  }
+}
+  #athkar-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  #athkar h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+  }
+   h3 {
+     margin-top: 10px;
+  }
+  
+  #athkar p {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  #virtues-text {
+    font-size: 16px;
+    color: #777;
+   }
+  
+   

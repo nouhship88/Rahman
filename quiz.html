@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لعبة الاختبار الإسلامية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* General Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Noto Sans Arabic", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+        direction: rtl; /* Right-to-left text */
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      header {
+        background-color: #f1f2f6;
+        color: #2c3e50;
+        padding: 30px 0;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      header h1 {
+        font-family: "Amiri", serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-family: "Amiri", serif;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #7f8c8d;
+      }
+
+      .screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  background-image: url("back.jpg");
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+      .hidden {
+        display: none;
+      }
+
+      button {
+  background-color: #959595; /* New button color */
+  color: #fff;
+  border: none;
+  padding: 14px 28px; /* Adjusted padding for better proportion */
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 8px; /* Softer border radius */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+  margin: 10px 0;
+}
+
+button:hover {
+  background-color: #3498db; /* Lighter shade for hover */
+  transform: scale(1.05); /* Subtle scaling effect on hover */
+}
+
+      #timer {
+        width: 100%;
+        height: 10px;
+        background-color: #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      #progress-bar {
+        height: 100%;
+        width: 100%;
+        background-color: #5480dd;
+        border-radius: 5px;
+        transition: width 1s linear;
+      }
+
+      #question-container {
+        background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+        
+      }
+
+      #question {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .options button {
+        background-color: #d8d0d0;
+        color: #333;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .options button:hover {
+        background-color: #ddd;
+      }
+
+      #feedback {
+        font-size: 1.2rem;
+        margin-top: 20px;
+      }
+
+      #end-screen {
+        text-align: center;
+      }
+
+      #final-score {
+        font-weight: bold;
+        color: #2c5f2d;
+      }
+
+      #feedback-message {
+        font-style: italic;
+        color: #555;
+      }
+
+      #questions-left {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: #555;
+        font-weight: bold;
+
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px 30px;
+        background-color: #f1f2f6;
+        color: #2c3e50;
+        margin-top: 20px;
+        border-radius: 5px 5px 0 0;
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        font-family: "Amiri", serif;
+      }
+
+      footer p {
+        font-size: 1rem;
+        color: #7f8c8d;
+      }
+
+      footer a {
+        color: #2980b9;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 1.1rem;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+        color: #3498db;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>اختبار إسلامي</h1>
+      <p>اختبر معرفتك بالثقافة والتاريخ الإسلامي!</p>
+    </header>
+
+    <div class="container">
+      <div id="start-screen" class="screen">
+        <button id="start-btn">ابدأ الاختبار</button>
+      </div>
+
+      <div id="quiz-screen" class="screen hidden">
+        <div id="timer">
+          <div id="progress-bar"></div>
+        </div>
+        <div id="questions-left"></div>
+        <div id="question-container">
+          <h2 id="question"></h2>
+          <div id="options" class="options"></div>
+        </div>
+        <div id="feedback"></div>
+        <button id="stop-btn">إيقاف الاختبار</button>
+      </div>
+
+      <div id="end-screen" class="screen hidden">
+        <h2>تم الانتهاء من الاختبار!</h2>
+        <p>نتيجتك: <span id="final-score"></span>/10</p>
+        <p id="feedback-message"></p>
+        <button id="restart-btn">إعادة الاختبار</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>© جميع الحقوق محفوظة - مسجد الرحمن غريان</p>
+    </footer>
+
+    <script>
+      let questions = [
+      { question: "ما هو اسم الصحابي الذي حمل لواء المسلمين في غزوة بدر؟", options: ["علي بن أبي طالب", "حمزة بن عبد المطلب", "أبو بكر الصديق", "عثمان بن عفان"], correct: "حمزة بن عبد المطلب" },
+  { question: "كم عدد السور المكية في القرآن الكريم؟", options: ["86", "20", "50", "60"], correct: "86" },
+  { question: "ما هو اسم النبي الذي أُرسل إلى قوم ثمود؟", options: ["صالح عليه السلام", "هود عليه السلام", "موسى عليه السلام", "محمد صلى الله عليه وسلم"], correct: "صالح عليه السلام" },
+  { question: "ما هي السورة التي تحتوي على آية الكرسي؟", options: ["سورة البقرة", "سورة آل عمران", "سورة النساء", "سورة الفاتحة"], correct: "سورة البقرة" },
+  { question: "من هو الصحابي الذي فاز بلقب “أسد الله”؟", options: ["علي بن أبي طالب", "خالد بن الوليد", "أبو بكر الصديق", "عمر بن الخطاب"], correct: "علي بن أبي طالب" },
+  { question: "ما هو اسم الصحابي الذي كان يلقب بـ“أبو الحسنين”؟", options: ["علي بن أبي طالب", "حسن بن علي", "حسين بن علي", "عبد الله بن عباس"], correct: "علي بن أبي طالب" },
+  { question: "كم عدد الأيام التي مكث فيها النبي محمد صلى الله عليه وسلم في غار ثور؟", options: ["3 أيام", "7 أيام", "10 أيام", "15 أيام"], correct: "3 أيام" },
+  { question: "من هو أول من آمن من أتباع رسول الله صلى الله عليه وسلم؟", options: ["خديجة بنت خويلد", "أبو بكر الصديق", "بلال بن رباح", "علي بن أبي طالب"], correct: "خديجة بنت خويلد" },
+  { question: "ما هي السورة التي تسمى “قلب القرآن”؟", options: ["سورة يس", "سورة البقرة", "سورة الفاتحة", "سورة الإخلاص"], correct: "سورة يس" },
+  { question: "من هو النبي الذي سمي بـ“خليل الله”؟", options: ["إبراهيم عليه السلام", "موسى عليه السلام", "عيسى عليه السلام", "محمد صلى الله عليه وسلم"], correct: "إبراهيم عليه السلام" },
+  { question: "من هو النبي الذي عاش في بطن الحوت؟", options: ["يونس عليه السلام", "إبراهيم عليه السلام", "موسى عليه السلام", "نوح عليه السلام"], correct: "يونس عليه السلام" },
+  { question: "ما هي السورة التي تسمى “أم الكتاب”؟", options: ["سورة الفاتحة", "سورة البقرة", "سورة الإخلاص", "سورة الناس"], correct: "سورة الفاتحة" },
+  { question: "من هو النبي الذي كلمه الله من غير حجاب؟", options: ["موسى عليه السلام", "إبراهيم عليه السلام", "عيسى عليه السلام", "محمد صلى الله عليه وسلم"], correct: "موسى عليه السلام" },
+  { question: "من هو النبي الذي لقب بـ“أبو الأنبياء”؟", options: ["إبراهيم عليه السلام", "نوح عليه السلام", "آدم عليه السلام", "محمد صلى الله عليه وسلم"], correct: "إبراهيم عليه السلام" },
+  { question: "ما هو عدد التكبيرات في صلاة العيد؟",
+    options: ["5 تكبيرات", "7 تكبيرات", "9 تكبيرات", "11 تكبيرة"],
+    correct: "7 تكبيرات"
+  },
+  {
+    question: "من هو الصحابي الذي اهتز عرش الرحمن لموته؟",
+    options: ["أبو بكر الصديق", "عمر بن الخطاب", "عثمان بن عفان", "سعد بن معاذ"],
+    correct: "سعد بن معاذ"
+  },
+  {
+    question: "ما هي السورة التي تسمى بـ\"عروس القرآن\"؟",
+    options: ["سورة الرحمن", "سورة الواقعة", "سورة الفاتحة", "سورة يس"],
+    correct: "سورة الرحمن"
+  },
+  {
+    question: "ما هي السورة التي تسمى بـ\"قلب القرآن\"؟",
+    options: ["سورة الفاتحة", "سورة البقرة", "سورة يس", "سورة الإخلاص"],
+    correct: "سورة يس"
+  },
+{ 
+    question: "ما هو أول بيت وضع للناس على وجه الأرض؟", 
+    options: ["الكعبة المشرفة", "المسجد النبوي", "بيت المقدس", "مسجد قباء"], 
+    correct: "الكعبة المشرفة" 
+  },
+  { 
+    question: "من هو النبي الذي سخر له الله الريح؟", 
+    options: ["سليمان عليه السلام", "موسى عليه السلام", "داوود عليه السلام", "عيسى عليه السلام"], 
+    correct: "سليمان عليه السلام" 
+  },
+  { 
+    question: "ما هو اسم أول مسجد بُني في الإسلام؟", 
+    options: ["مسجد قباء", "المسجد النبوي", "المسجد الأقصى", "مسجد الحرام"], 
+    correct: "مسجد قباء" 
+  },
+  { 
+    question: "من هو النبي الذي أطلق عليه لقب 'ذو النون'؟", 
+    options: ["يونس عليه السلام", "نوح عليه السلام", "إبراهيم عليه السلام", "أيوب عليه السلام"], 
+    correct: "يونس عليه السلام" 
+  },
+  { 
+    question: "ما هي السورة التي ذكر فيها اسم 'الله' في كل آية؟", 
+    options: ["سورة المجادلة", "سورة الفاتحة", "سورة الإخلاص", "سورة البقرة"], 
+    correct: "سورة المجادلة" 
+  },
+  { 
+    question: "كم عدد أشهر الحرم في الإسلام؟", 
+    options: ["أربعة أشهر", "ثلاثة أشهر", "خمسة أشهر", "شهرين"], 
+    correct: "أربعة أشهر" 
+  },
+  { 
+    question: "من هو النبي الذي أُرسل إلى قوم عاد؟", 
+    options: ["هود عليه السلام", "صالح عليه السلام", "شعيب عليه السلام", "لوط عليه السلام"], 
+    correct: "هود عليه السلام" 
+  },
+  { 
+    question: "من هو النبي الذي أرسله الله إلى مدين؟", 
+    options: ["شعيب عليه السلام", "هود عليه السلام", "لوط عليه السلام", "إبراهيم عليه السلام"], 
+    correct: "شعيب عليه السلام" 
+  },
+  { 
+    question: "ما هي الصلاة التي تُسمى الصلاة الوسطى؟", 
+    options: ["صلاة العصر", "صلاة الفجر", "صلاة الظهر", "صلاة المغرب"], 
+    correct: "صلاة العصر" 
+  },
+  { 
+    question: "ما هو الحيوان الذي تكلم في القرآن الكريم؟", 
+    options: ["النملة", "الهدهد", "الحوت", "البقرة"], 
+    correct: "النملة" 
+  },
+  { 
+    question: "ما هي شروط قبول العمل عند الله؟", 
+    options: [
+      "الإخلاص والمتابعة", 
+      "الإخلاص فقط", 
+      "المتابعة فقط", 
+      "نية الخير"
+    ], 
+    correct: "الإخلاص والمتابعة" 
+  },
+  { 
+    question: "ما هي الصفة التي تجعل المسلم يدخل الجنة بسهولة كما قال النبي؟", 
+    options: [
+      "حسن الخلق", 
+      "الصبر", 
+      "الكرم", 
+      "الشجاعة"
+    ], 
+    correct: "حسن الخلق" 
+  },
+  { 
+    question: "ما هي القاعدة الأخلاقية في التعامل مع الآخرين في الإسلام؟", 
+    options: [
+      "عامل الناس كما تحب أن تُعامل", 
+      "احذر الناس جميعًا", 
+      "لا تثق بأحد", 
+      "قدم مصلحتك أولًا"
+    ], 
+    correct: "عامل الناس كما تحب أن تُعامل" 
+  }
+        // Add more questions as needed up to 10
+      ];
+
+      let currentQuestionIndex = 0;
+      let score = 0;
+      let timeLeft = 15;
+      let timerInterval;
+
+      const startScreen = document.getElementById("start-screen");
+      const quizScreen = document.getElementById("quiz-screen");
+      const endScreen = document.getElementById("end-screen");
+      const startBtn = document.getElementById("start-btn");
+      const questionElement = document.getElementById("question");
+      const optionsElement = document.getElementById("options");
+      const feedbackElement = document.getElementById("feedback");
+      const progressBar = document.getElementById("progress-bar");
+      const finalScoreElement = document.getElementById("final-score");
+      const feedbackMessageElement = document.getElementById("feedback-message");
+      const restartBtn = document.getElementById("restart-btn");
+      const stopBtn = document.getElementById("stop-btn");
+      const questionsLeftElement = document.getElementById("questions-left");
+
+      startBtn.addEventListener("click", startQuiz);
+      restartBtn.addEventListener("click", restartQuiz);
+      stopBtn.addEventListener("click", stopQuiz);
+
+      function shuffleQuestions() {
+        return questions.sort(() => Math.random() - 0.5).slice(0, 10); // Shuffle and limit to 10 questions
+      }
+
+      function shuffleOptions(options) {
+        return options.sort(() => Math.random() - 0.5); // Shuffle the options for each question
+      }
+
+      function startQuiz() {
+        questions = shuffleQuestions(); // Limit to 10 shuffled questions
+        startScreen.classList.add("hidden");
+        quizScreen.classList.remove("hidden");
+        loadQuestion();
+        startTimer();
+      }
+
+      function loadQuestion() {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+        optionsElement.innerHTML = "";
+        const shuffledOptions = shuffleOptions([...currentQuestion.options]);
+
+        shuffledOptions.forEach((option) => {
+          const button = document.createElement("button");
+          button.textContent = option;
+          button.addEventListener("click", () => checkAnswer(option, button));
+          optionsElement.appendChild(button);
+        });
+
+        feedbackElement.textContent = "";
+        updateQuestionsLeft();
+      }
+
+      function checkAnswer(selectedOption, selectedButton) {
+        const currentQuestion = questions[currentQuestionIndex];
+        if (selectedOption === currentQuestion.correct) {
+          score++;
+          feedbackElement.textContent = "إجابة صحيحة!";
+          feedbackElement.style.color = "green";
+        } else {
+          feedbackElement.textContent = `إجابة خاطئة! الإجابة الصحيحة هي ${currentQuestion.correct}.`;
+          feedbackElement.style.color = "red";
+        }
+
+        Array.from(optionsElement.children).forEach((button) => {
+          button.disabled = true;
+        });
+
+        clearInterval(timerInterval);
+        setTimeout(nextQuestion, 2000);
+      }
+
+      function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          loadQuestion();
+          resetTimer();
+        } else {
+          endQuiz();
+        }
+      }
+
+      function startTimer() {
+        timeLeft = 15;
+        progressBar.style.width = "100%";
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          progressBar.style.width = `${(timeLeft / 15) * 100}%`;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            feedbackElement.textContent = "انتهى الوقت!";
+            setTimeout(nextQuestion, 2000);
+          }
+        }, 1000);
+      }
+
+      function resetTimer() {
+        clearInterval(timerInterval);
+        startTimer();
+      }
+
+      function stopQuiz() {
+        clearInterval(timerInterval);
+        quizScreen.classList.add("hidden");
+        endScreen.classList.remove("hidden");
+        finalScoreElement.textContent = score;
+        feedbackMessageElement.textContent = "تم إيقاف الاختبار.";
+      }
+
+      function endQuiz() {
+        quizScreen.classList.add("hidden");
+        endScreen.classList.remove("hidden");
+        finalScoreElement.textContent = score;
+        feedbackMessageElement.textContent =
+          score >= 8
+            ? "ماشاءالله! لديك معرفة رائعة !"
+            : score >= 5
+            ? "جيد! لكن هناك مجال للتحسين. تابع التعلم!"
+            : "حاول مجددًا! المعرفة في متناول يدك.";
+      }
+
+      function restartQuiz() {
+        score = 0;
+        currentQuestionIndex = 0;
+        startScreen.classList.remove("hidden");
+        endScreen.classList.add("hidden");
+        loadQuestion();
+      }
+
+      function updateQuestionsLeft() {
+        questionsLeftElement.textContent = `الأسئلة المتبقية: ${
+          questions.length - currentQuestionIndex
+        }`;
+      }
+    </script>
+  </body>
+</html>
