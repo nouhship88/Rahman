@@ -188,3 +188,5 @@ displayAthkar();
 // Update the athkar every minute to ensure it reflects the correct time
 setInterval(displayAthkar, 60000);
 
+
+
