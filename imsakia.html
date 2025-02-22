@@ -6,7 +6,7 @@
     <meta name="description" content="إمساكية رمضان للمسجد" />
     <meta
       name="keywords"
-      content="إمساكية رمضان, غريان, أوقات الصلاة, رمضان ليبيا"
+      content="إمساكية رمضان, أوقات الصلاة, رمضان, موقعك"
     />
     <meta property="og:image" content="logo.png" />
     <title>إمساكية رمضان</title>
@@ -38,9 +38,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 10px 20px;
+        padding: 20px;
         background: url("mosque-bg-dark.jpg") no-repeat center center/cover;
         color: #f9f9f9;
+        text-align: center;
       }
 
       .header-logo {
@@ -54,41 +55,56 @@
         color: #34495e;
       }
 
-      header h1,
-      header h2 {
+      header h1 {
+        font-size: 2.5em;
         margin: 10px 0;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
       }
 
+      header h2 {
+        font-size: 1.5em;
+        margin: 5px 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      header h3 {
+        font-size: 1.2em;
+        margin: 5px 0;
+        color: #f39c12;
+      }
+
       body.light-mode header h1,
-      body.light-mode header h2 {
+      body.light-mode header h2,
+      body.light-mode header h3 {
         text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
       }
 
-      header h1 {
-        font-size: 3em;
+      /* Location Permission Message */
+      .location-permission {
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 600px;
+        text-align: center;
+        font-size: 1.1em;
+        line-height: 1.6;
       }
 
-      header h2 {
-        font-size: 1.8em;
-      }
-
-      /* Button */
-      .toggle-dark-mode {
-        margin: 10px 0;
-        padding: 10px 15px;
-        font-size: 1em;
-        font-family: "Cairo", sans-serif;
-        font-weight: bold;
+      .location-permission button {
         background-color: #f39c12;
         color: #121212;
         border: none;
+        padding: 10px 20px;
+        font-size: 1em;
         border-radius: 25px;
         cursor: pointer;
+        margin-top: 10px;
         transition: all 0.3s ease;
       }
 
-      .toggle-dark-mode:hover {
+      .location-permission button:hover {
         background-color: #34495e;
         color: #fff;
       }
@@ -169,11 +185,10 @@
         color: #34495e;
       }
 
-       /* Responsive Styles */
-       @media (max-width: 768px) {
+      /* Responsive Styles */
+      @media (max-width: 768px) {
         header {
           padding: 10px 15px;
-          background-position: top center;
         }
 
         header h1 {
@@ -184,14 +199,14 @@
           font-size: 1.2em;
         }
 
-        .toggle-dark-mode {
-          font-size: 0.9em;
-          padding: 8px 12px;
+        .location-permission {
+          font-size: 1em;
+          padding: 15px;
         }
 
         .ramadan-timetable table th,
         .ramadan-timetable table td {
-          padding: 4px;
+          padding: 10px;
           font-size: 0.9em;
         }
       }
@@ -199,7 +214,6 @@
       @media (max-width: 480px) {
         header {
           padding: 10px 10px;
-          background-position: center top;
         }
 
         header h1 {
@@ -210,46 +224,10 @@
           font-size: 1em;
         }
 
-        .toggle-dark-mode {
-          font-size: 0.8em;
-          padding: 6px 10px;
+        .location-permission {
+          font-size: 0.9em;
+          padding: 10px;
         }
-      }
-
-
-      /* Top link styling */
-      .back-home-link {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        color: #333;
-        font-size: 16px;
-        text-decoration: none;
-        background-color: #f1f1f1;
-        padding: 5px 10px;
-        border-radius: 5px;
-      }
-
-      .back-home-link:hover {
-        background-color: #ddd;
-      }
-
-      /* Bottom button styling */
-      .go-home-button {
-        display: block;
-        margin: 20px auto;
-        padding: 10px 20px;
-        background-color: #f39c12;
-        color: white;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        text-align: center;
-        text-decoration: none;
-      }
-
-      .go-home-button:hover {
-        background-color: #45a049;
       }
     </style>
   </head>
@@ -257,14 +235,24 @@
     <!-- Header -->
     <header>
       <img src="logo.png" alt="Logo" class="header-logo" />
-      <h1>مسجد الرَّحمٰن بمدينة غريان</h1>
-      <h2>إمساكية شهر رمضان المبارك - لسنة 2025</h2>
-      <h3>"كل عام وانتم بخير"</h3>
+      <h1>إمساكية شهر رمضان المبارك</h1>
+      <h2 id="city-name">جارٍ تحميل بيانات موقعك...</h2>
+      <h3>"كل عام وأنتم بخير"</h3>
       <button class="toggle-dark-mode">تبديل وضع النهار/الليل</button>
     </header>
 
+    <!-- Location Permission Message -->
+    <div class="location-permission" id="location-permission">
+      <p>
+        نود الحصول على موقعك الدقيق لتزويدك بأوقات الصلاة الأكثر دقة بناءً على
+        موقعك الحالي. يرجى السماح بالوصول إلى الموقع.
+      </p>
+      <button onclick="getLocation()">السماح بالوصول إلى الموقع</button>
+    </div>
+
     <!-- Ramadan Timetable Section -->
     <section class="ramadan-timetable">
+      <h2>إمساكية رمضان</h2>
       <table>
         <thead>
           <tr>
@@ -286,18 +274,21 @@
     <section class="eid-prayer">
       <p>ملاحظة: سيتم الإعلان عن موعد صلاة العيد لاحقاً بمشيئة الله تعالى!</p>
       <a href="index.html" class="go-home-button">العودة إلى الصفحة الرئيسية</a>
-      <!-- Button to Home Page -->
     </section>
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2025 مسجد الرَّحمٰن غريان | جميع الحقوق محفوظة</p>
+      <p>&copy; 2025 مسجد الرَّحمٰن | جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
       const toggleButton = document.querySelector(".toggle-dark-mode");
       const body = document.body;
       const logo = document.querySelector(".header-logo");
+      const cityNameElement = document.getElementById("city-name");
+      const locationPermissionElement = document.getElementById(
+        "location-permission"
+      );
 
       toggleButton.addEventListener("click", () => {
         body.classList.toggle("dark-mode");
@@ -312,65 +303,102 @@
       });
 
       // Function to convert 24-hour time to 12-hour format
-      // Function to convert 24-hour time to 12-hour format
       function convertTo12HourFormat(time) {
         let [hours, minutes] = time.split(":");
-        hours = parseInt(hours, 10); // Convert hours to an integer
-        minutes = parseInt(minutes, 10); // Convert minutes to an integer
+        hours = parseInt(hours, 10);
+        minutes = parseInt(minutes, 10);
 
-        const suffix = hours >= 12 ? "" : ""; // "م" for PM, "ص" for AM
-        hours = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
-        minutes = minutes < 10 ? "0" + minutes : minutes; // Add leading zero if minutes < 10
+        const suffix = hours >= 12 ? "" : "";
+        hours = hours % 12 || 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
 
         return `${hours}:${minutes} ${suffix}`;
       }
 
-      const imsakiaAPI =
-        "https://api.aladhan.com/v1/calendarByCity?city=Gharyan&country=Libya&method=3&month=3&year=2025";
+      // Function to fetch city name using coordinates
+      async function getCityName(latitude, longitude) {
+        const apiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=ar`;
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          return data.locality || "موقعك";
+        } catch (error) {
+          console.error("Error fetching city name:", error);
+          return "موقعك";
+        }
+      }
 
-      fetch(imsakiaAPI)
-        .then((response) => response.json())
-        .then((data) => {
+      // Function to fetch prayer times
+      async function getPrayerTimes(latitude, longitude) {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+
+        const apiUrl = `https://api.aladhan.com/v1/calendar?latitude=${latitude}&longitude=${longitude}&method=2&month=${month}&year=${year}`;
+
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
           const tbody = document.querySelector(".ramadan-timetable tbody");
-          tbody.innerHTML = ""; // Clear existing data
+          tbody.innerHTML = "";
 
-          // Get the current date in the format "DD-MM-YYYY"
-          const today = new Date();
-          const currentDate = `${today
-            .getDate()
-            .toString()
-            .padStart(2, "0")}-${(today.getMonth() + 1)
-            .toString()
-            .padStart(2, "0")}-${today.getFullYear()}`;
+          const currentDate = today.toISOString().split("T")[0];
 
           data.data.forEach((day, index) => {
             const row = document.createElement("tr");
 
-            // Format the date from the API to match the current date format
-            const apiDate = day.date.gregorian.date
-              .split("-")
-              .reverse()
-              .join("-");
-
-            // Check if the current date matches the API date
-            if (apiDate === currentDate) {
-              row.classList.add("current-day"); // Apply the highlight class
+            if (day.date.gregorian.date === currentDate) {
+              row.classList.add("current-day");
             }
 
             row.innerHTML = `
-        <td>${index + 1} رمضان - ${day.date.gregorian.date}</td>
-        <td>${convertTo12HourFormat(day.timings.Fajr.replace("EET", ""))}</td>
-        <td>${convertTo12HourFormat(day.timings.Dhuhr.replace("EET", ""))}</td>
-        <td>${convertTo12HourFormat(day.timings.Asr.replace("EET", ""))}</td>
-        <td>${convertTo12HourFormat(
-          day.timings.Maghrib.replace("EET", "")
-        )}</td>
-        <td>${convertTo12HourFormat(day.timings.Isha.replace("EET", ""))}</td>
-      `;
+              <td>${index + 1} رمضان - ${day.date.gregorian.date}</td>
+              <td>${convertTo12HourFormat(day.timings.Fajr.split(" ")[0])}</td>
+              <td>${convertTo12HourFormat(day.timings.Dhuhr.split(" ")[0])}</td>
+              <td>${convertTo12HourFormat(day.timings.Asr.split(" ")[0])}</td>
+              <td>${convertTo12HourFormat(day.timings.Maghrib.split(" ")[0])}</td>
+              <td>${convertTo12HourFormat(day.timings.Isha.split(" ")[0])}</td>
+            `;
             tbody.appendChild(row);
           });
-        })
-        .catch((error) => console.error("Error fetching Imsakia data:", error));
+        } catch (error) {
+          console.error("Error fetching prayer times:", error);
+        }
+      }
+
+      // Function to get user location
+      async function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+
+              // Hide location permission message
+              locationPermissionElement.style.display = "none";
+
+              // Fetch city name and update header
+              const cityName = await getCityName(latitude, longitude);
+              cityNameElement.textContent = `إمساكية رمضان لمدينة ${cityName}`;
+
+              // Fetch prayer times
+              await getPrayerTimes(latitude, longitude);
+            },
+            (error) => {
+              console.error("Error getting location:", error);
+              locationPermissionElement.innerHTML =
+                "<p>لم نتمكن من الحصول على موقعك. يرجى التأكد من السماح بالوصول إلى الموقع.</p>";
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported by this browser.");
+          locationPermissionElement.innerHTML =
+            "<p>المتصفح الخاص بك لا يدعم تحديد الموقع.</p>";
+        }
+      }
+
+      // Request location permission on page load
+      getLocation();
     </script>
   </body>
 </html>
