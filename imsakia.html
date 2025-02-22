@@ -169,8 +169,8 @@
         color: #34495e;
       }
 
-      /* Responsive Styles */
-      @media (max-width: 768px) {
+       /* Responsive Styles */
+       @media (max-width: 768px) {
         header {
           padding: 10px 15px;
           background-position: top center;
@@ -191,7 +191,7 @@
 
         .ramadan-timetable table th,
         .ramadan-timetable table td {
-          padding: 10px;
+          padding: 4px;
           font-size: 0.9em;
         }
       }
@@ -216,41 +216,41 @@
         }
       }
 
+
       /* Top link styling */
-.back-home-link {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: #333;
-  font-size: 16px;
-  text-decoration: none;
-  background-color: #f1f1f1;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
+      .back-home-link {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: #333;
+        font-size: 16px;
+        text-decoration: none;
+        background-color: #f1f1f1;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
 
-.back-home-link:hover {
-  background-color: #ddd;
-}
+      .back-home-link:hover {
+        background-color: #ddd;
+      }
 
-/* Bottom button styling */
-.go-home-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #f39c12;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-}
+      /* Bottom button styling */
+      .go-home-button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #f39c12;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+      }
 
-.go-home-button:hover {
-  background-color: #45a049;
-}
-
+      .go-home-button:hover {
+        background-color: #45a049;
+      }
     </style>
   </head>
   <body class="light-mode">
@@ -269,7 +269,7 @@
         <thead>
           <tr>
             <th>اليوم</th>
-             <th>وقت الفجر</th>
+            <th>وقت الفجر</th>
             <th>وقت الظهر</th>
             <th>وقت العصر</th>
             <th>وقت المغرب</th>
@@ -285,51 +285,88 @@
     <!-- Eid Prayer Note -->
     <section class="eid-prayer">
       <p>ملاحظة: سيتم الإعلان عن موعد صلاة العيد لاحقاً بمشيئة الله تعالى!</p>
-      <a href="index.html" class="go-home-button">العودة إلى الصفحة الرئيسية</a> <!-- Button to Home Page -->
-
+      <a href="index.html" class="go-home-button">العودة إلى الصفحة الرئيسية</a>
+      <!-- Button to Home Page -->
     </section>
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2025 مسجد الرَّحمٰن  غريان | جميع الحقوق محفوظة</p>
-      
+      <p>&copy; 2025 مسجد الرَّحمٰن غريان | جميع الحقوق محفوظة</p>
     </footer>
 
     <script>
       const toggleButton = document.querySelector(".toggle-dark-mode");
-const body = document.body;
-const logo = document.querySelector(".header-logo");
+      const body = document.body;
+      const logo = document.querySelector(".header-logo");
 
-toggleButton.addEventListener("click", () => {
-  body.classList.toggle("dark-mode");
-  body.classList.toggle("light-mode");
+      toggleButton.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        body.classList.toggle("light-mode");
 
-  // Change logo based on mode
-  if (body.classList.contains("light-mode")) {
-    logo.src = "logo.png";  // Change to light mode logo
-  } else {
-    logo.src = "logo.png";  // Change to dark mode logo
-  }
-});
+        // Change logo based on mode
+        if (body.classList.contains("light-mode")) {
+          logo.src = "logo2.png"; // Change to light mode logo
+        } else {
+          logo.src = "logo.png"; // Change to dark mode logo
+        }
+      });
+
+      // Function to convert 24-hour time to 12-hour format
+      // Function to convert 24-hour time to 12-hour format
+      function convertTo12HourFormat(time) {
+        let [hours, minutes] = time.split(":");
+        hours = parseInt(hours, 10); // Convert hours to an integer
+        minutes = parseInt(minutes, 10); // Convert minutes to an integer
+
+        const suffix = hours >= 12 ? "" : ""; // "م" for PM, "ص" for AM
+        hours = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
+        minutes = minutes < 10 ? "0" + minutes : minutes; // Add leading zero if minutes < 10
+
+        return `${hours}:${minutes} ${suffix}`;
+      }
 
       const imsakiaAPI =
-        "https://api.aladhan.com/v1/calendarByCity?city=Gharyan&country=Libya&method=2&month=3&year=2025";
+        "https://api.aladhan.com/v1/calendarByCity?city=Gharyan&country=Libya&method=3&month=3&year=2025";
 
       fetch(imsakiaAPI)
         .then((response) => response.json())
         .then((data) => {
           const tbody = document.querySelector(".ramadan-timetable tbody");
           tbody.innerHTML = ""; // Clear existing data
+
+          // Get the current date in the format "DD-MM-YYYY"
+          const today = new Date();
+          const currentDate = `${today
+            .getDate()
+            .toString()
+            .padStart(2, "0")}-${(today.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${today.getFullYear()}`;
+
           data.data.forEach((day, index) => {
             const row = document.createElement("tr");
+
+            // Format the date from the API to match the current date format
+            const apiDate = day.date.gregorian.date
+              .split("-")
+              .reverse()
+              .join("-");
+
+            // Check if the current date matches the API date
+            if (apiDate === currentDate) {
+              row.classList.add("current-day"); // Apply the highlight class
+            }
+
             row.innerHTML = `
-              <td>${index + 1} رمضان</td>
-              <td>${day.timings.Fajr}</td>
-              <td>${day.timings.Dhuhr}</td>
-              <td>${day.timings.Asr}</td>
-              <td>${day.timings.Maghrib}</td>
-              <td>${day.timings.Isha}</td>
-            `;
+        <td>${index + 1} رمضان - ${day.date.gregorian.date}</td>
+        <td>${convertTo12HourFormat(day.timings.Fajr.replace("EET", ""))}</td>
+        <td>${convertTo12HourFormat(day.timings.Dhuhr.replace("EET", ""))}</td>
+        <td>${convertTo12HourFormat(day.timings.Asr.replace("EET", ""))}</td>
+        <td>${convertTo12HourFormat(
+          day.timings.Maghrib.replace("EET", "")
+        )}</td>
+        <td>${convertTo12HourFormat(day.timings.Isha.replace("EET", ""))}</td>
+      `;
             tbody.appendChild(row);
           });
         })
