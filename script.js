@@ -29,7 +29,7 @@ function updateRamadanCountdown() {
   const now = new Date();
   const remainingTime = ramadanStart - now;
 
-  if (remainingTime > 0) {
+  if (remainingTime >0) {
     const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
     const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -49,8 +49,9 @@ function updateRamadanCountdown() {
     document.getElementById("progress").style.width = `${progressPercentage}%`;
 
   } else {
-    document.getElementById("countdown").textContent = "رمضان قد بدأ!";
+    document.getElementById("countdown").innerHTML = "رمضان قد بدأ - مبارك عليكم رمضان <br> قد جاءكم شهر رمضان شهر مبارك، كتب الله عليكم صيامه، فيه تفتح أبواب الجنة وتغلق فيه أبواب الجحيم، وتغل فيه الشياطين، فيه ليلة خير من ألف شهر، من حرم خيرها فقد حرم";
     document.getElementById("progress").style.width = "100%"; // Full when Ramadan starts
+    document.getElementById("doa").style.display = "none"; // Hides the element
   }
 }
 
