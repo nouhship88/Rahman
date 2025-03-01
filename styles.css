@@ -172,6 +172,129 @@
     margin-bottom: 20px;
   }
   
+
+  .recitations {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .recitation-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .recitation {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .recitation span {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .play-btn,
+  .share-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+  }
+  
+  .play-btn:hover,
+  .share-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .audio-player {
+    margin-top: 20px;
+  }
+  
+  audio {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .recitation-list {
+      grid-template-columns: 1fr;
+    }
+  
+    .play-btn,
+    .share-btn {
+      width: 100%;
+    }
+  }
+  .share-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .share-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 30%;
+  }
+  
+  .share-btn i {
+    margin-right: 8px;
+  }
+  
+  .share-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  .share-btn:active {
+    background-color: #387d3b;
+  }
+  
+  .share-btns .share-btn:first-child {
+    background-color: #25D366; /* WhatsApp */
+  }
+  
+  .share-btns .share-btn:nth-child(2) {
+    background-color: #1DA1F2; /* Twitter */
+  }
+  
+  .share-btns .share-btn:nth-child(3) {
+    background-color: #3b5998; /* Facebook */
+  }
+  
+  @media (max-width: 768px) {
+    .share-btns {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .share-btn {
+      width: 100%;
+    }
+  }
+  
   /* Container for the weather section */
    
     

@@ -191,3 +191,39 @@ setInterval(displayAthkar, 60000);
 
 
 
+// JavaScript to handle audio playback
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle play button functionality
+  document.querySelectorAll('.play-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const audioSrc = this.getAttribute('data-src');
+      const audioPlayer = document.getElementById('audio-player');
+      const audioSource = audioPlayer.querySelector('source');
+      audioSource.setAttribute('src', audioSrc);
+      audioPlayer.load();  // Reload audio player with new source
+      audioPlayer.play();  // Start playing the audio
+    });
+  });
+
+  // Handle share button functionality
+  document.querySelectorAll('.share-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const title = this.getAttribute('data-title');
+      const url = this.getAttribute('data-url');
+
+      // Generate the sharing URLs
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`;
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+
+      // Share to the appropriate platform
+      if (this.innerText.includes('واتساب')) {
+        window.open(whatsappUrl, '_blank');
+      } else if (this.innerText.includes('تويتر')) {
+        window.open(twitterUrl, '_blank');
+      } else if (this.innerText.includes('فيسبوك')) {
+        window.open(facebookUrl, '_blank');
+      }
+    });
+  });
+});
