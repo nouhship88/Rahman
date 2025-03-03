@@ -165,135 +165,100 @@
     font-weight: bold;
   }
   
-  .section-title h2 {
-    text-align: center;
-    font-size: 2.2em;
-    color: #34495e;
-    margin-bottom: 20px;
-  }
-  
 
-  .recitations {
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  .recitation-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 20px 0;
-  }
-  
-  .recitation {
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .recitation span {
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .play-btn,
-  .share-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px 0;
-    transition: background-color 0.3s;
-  }
-  
-  .play-btn:hover,
-  .share-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .audio-player {
-    margin-top: 20px;
-  }
-  
-  audio {
+  .player-container {
+    /* position: absolute; */
+    /* bottom: 0;
+    left: 0; */
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    display: block;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .recitation-list {
-      grid-template-columns: 1fr;
-    }
-  
-    .play-btn,
-    .share-btn {
-      width: 100%;
-    }
-  }
-  .share-btns {
+    background: var(--card-background);
+    box-shadow: var(--shadow);
+    padding: 15px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .share-btn {
-    background-color: #4CAF50;
+    z-index: 1000;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-controls button {
+    background: var(--primary-color);
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 30%;
-  }
-  
-  .share-btn i {
-    margin-right: 8px;
-  }
-  
-  .share-btn:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-  }
-  
-  .share-btn:active {
-    background-color: #387d3b;
-  }
-  
-  .share-btns .share-btn:first-child {
-    background-color: #25D366; /* WhatsApp */
-  }
-  
-  .share-btns .share-btn:nth-child(2) {
-    background-color: #1DA1F2; /* Twitter */
-  }
-  
-  .share-btns .share-btn:nth-child(3) {
-    background-color: #3b5998; /* Facebook */
-  }
-  
-  @media (max-width: 768px) {
-    .share-btns {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .share-btn {
-      width: 100%;
-    }
-  }
+}
+
+.player-controls button:hover {
+    background: var(--secondary-color);
+}
+
+.player-info {
+    flex-grow: 1;
+    margin: 0 20px;
+    text-align: center;
+}
+
+.player-info span {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.recitation-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 100px; /* Space for fixed player */
+}
+
+.recitation {
+    background: var(--card-background);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.recitation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.recitation.active {
+    border: 2px solid var(--secondary-color);
+}
+
+.recitation .share-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
+}
+
+.recitation .share-btn:hover {
+    background: var(--secondary-color);
+}
+
+audio {
+    display: none; /* Hide the default audio player */
+}
   
   /* Container for the weather section */
    

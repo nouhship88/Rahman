@@ -190,40 +190,117 @@ displayAthkar();
 setInterval(displayAthkar, 60000);
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  const recitations = [
+      { title: "سورة الطارق", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation1.mp3" },
+      { title: "سورة المطففين", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation2.mp3" },
+      { title: "سورة الرحمن", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation3.mp3" },
+      { title: "سورة البروج", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation4.mp3" },
+      { title: "سورة الفجر", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation5.mp3" }
+  ];
 
-// JavaScript to handle audio playback
-document.addEventListener('DOMContentLoaded', function() {
-  // Handle play button functionality
-  document.querySelectorAll('.play-btn').forEach(button => {
-    button.addEventListener('click', function () {
-      const audioSrc = this.getAttribute('data-src');
-      const audioPlayer = document.getElementById('audio-player');
-      const audioSource = audioPlayer.querySelector('source');
-      audioSource.setAttribute('src', audioSrc);
-      audioPlayer.load();  // Reload audio player with new source
-      audioPlayer.play();  // Start playing the audio
-    });
+  const recitationList = document.getElementById("recitation-list");
+  const audioPlayer = document.getElementById("audio-player");
+  const playBtn = document.getElementById("play-btn");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const currentTitle = document.getElementById("current-title");
+  const themeToggle = document.getElementById("theme-toggle");
+  let currentIndex = 0;
+
+  // Load a recitation by index
+  function loadRecitation(index) {
+      currentIndex = index;
+      audioPlayer.src = recitations[index].src;
+      currentTitle.textContent = `${recitations[index].title} - ${recitations[index].reciter}`;
+      updateActiveRecitation();
+      audioPlayer.play();
+      playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  }
+
+  // Update the active recitation style
+  function updateActiveRecitation() {
+      document.querySelectorAll(".recitation").forEach((recitation, index) => {
+          if (index === currentIndex) {
+              recitation.classList.add("active");
+          } else {
+              recitation.classList.remove("active");
+          }
+      });
+  }
+
+  // Render recitations
+  recitations.forEach((recitation, index) => {
+      const recitationDiv = document.createElement("div");
+      recitationDiv.classList.add("recitation");
+      recitationDiv.innerHTML = `
+          <span>${recitation.title} - ${recitation.reciter}</span>
+          <button class="share-btn" data-title="${recitation.title}" data-reciter="${recitation.reciter}">
+              <i class="fab fa-whatsapp"></i> مشاركة
+          </button>
+      `;
+      recitationDiv.addEventListener("click", function () {
+          loadRecitation(index);
+      });
+      recitationList.appendChild(recitationDiv);
   });
 
-  // Handle share button functionality
-  document.querySelectorAll('.share-btn').forEach(button => {
-    button.addEventListener('click', function () {
-      const title = this.getAttribute('data-title');
-      const url = this.getAttribute('data-url');
-
-      // Generate the sharing URLs
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`;
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`;
-      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-
-      // Share to the appropriate platform
-      if (this.innerText.includes('واتساب')) {
-        window.open(whatsappUrl, '_blank');
-      } else if (this.innerText.includes('تويتر')) {
-        window.open(twitterUrl, '_blank');
-      } else if (this.innerText.includes('فيسبوك')) {
-        window.open(facebookUrl, '_blank');
+  // Play/Pause button
+  playBtn.addEventListener("click", function () {
+      if (audioPlayer.paused) {
+          audioPlayer.play();
+          playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+          audioPlayer.pause();
+          playBtn.innerHTML = '<i class="fas fa-play"></i>';
       }
-    });
   });
+
+  // Previous button
+  prevBtn.addEventListener("click", function () {
+      if (currentIndex > 0) {
+          loadRecitation(currentIndex - 1);
+      }
+  });
+
+  // Next button
+  nextBtn.addEventListener("click", function () {
+      if (currentIndex < recitations.length - 1) {
+          loadRecitation(currentIndex + 1);
+      }
+  });
+
+  // Automatically play the next recitation
+  audioPlayer.addEventListener("ended", function () {
+      if (currentIndex < recitations.length - 1) {
+          loadRecitation(currentIndex + 1);
+      }
+  });
+
+  // WhatsApp share button
+  document.querySelectorAll(".share-btn").forEach(button => {
+      button.addEventListener("click", function (e) {
+          e.stopPropagation(); // Prevent triggering the parent div's click event
+          const title = this.getAttribute("data-title");
+          const reciter = this.getAttribute("data-reciter");
+          const url = window.location.href;
+          const message = `استمع إلى "${title}" بصوت ${reciter}:\n${url}`;
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+          window.open(whatsappUrl, "_blank");
+      });
+  });
+
+  // Dark/Light mode toggle
+  themeToggle.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode);
+      themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  });
+
+  // Check for saved dark mode preference
+  if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+  }
 });

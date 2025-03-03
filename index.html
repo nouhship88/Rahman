@@ -34,17 +34,20 @@
           <p>أوقات الصلاة والتحديثات الجوية المحلية</p>
         </div>
       </div>
+      <!-- Toggle Button for Mobile -->
+      <button class="toggle-button" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
     </header>
 
-    <nav>
+    <nav class="nav-links">
       <a href="#prayer-times">أوقات الصلاة</a>
+      <a href="quran.html">تلاوات من المسجد </a>
       <a href="#weather">الطقس</a>
       <a href="imsakia.html">إمساكية 2025</a>
       <a href="quiz.html">اختبر معلوماتك</a>
       <a href="zakat.html">احسب زكاة مالك</a>
       <a href="#contact">اتصل بنا</a>
-
-
     </nav>
     
     <!-- Ramadan Countdown Section -->
@@ -64,7 +67,6 @@
         <p id="doa">اللهم بلغنا رمضان وبارك لنا فيه وارزقنا صيامه وقيامه</p>
       </section>
 
-      
       <!-- Prayer Times Display Section -->
       <section class="prayer-times-display" id="prayer-times" data-aos="zoom-in" data-aos-duration="1000">
         <h2>  أوقات الصلاة والإقامة</h2>
@@ -73,10 +75,7 @@
           allowfullscreen
         ></iframe>
         <a href="https://mosqueprayertimes.com/al-rahmanmosque" class="go-home-button">عرض أوقات الصلاة في شاشة منفصلة</a> <!-- Button to Home Page -->
-
       </section>
-
-     
 
       <section class="section" id="weather">
         <div class="container">
@@ -88,10 +87,6 @@
               <h2>الحرارة</h2>
               <span id="temperature"></span>°C
             </div>
-            <!-- <div class="weather-item">
-              <h2>الرياح</h2>
-              <span id="wind"></span> m/s
-            </div> -->
             <div class="weather-item"  data-aos="flip-left">
               <h2>الإحساس بالحرارة</h2>
               <span id="feels-like"></span>°C
@@ -108,106 +103,6 @@
           </div>
         </div>
       </section>
-
-      <section class="recitations">
-        <h2>🎙️ تلاوات مختارة من المسجد</h2>
-        <div class="recitation-list">
-          <!-- Recitation 1 -->
-          <div class="recitation">
-            <span>📖 سورة الطارق - الشيخ خالد الزرقاني</span>
-            <button class="play-btn" data-src="audio/recitation1.mp3">▶️ استمع</button>
-            <div class="share-btns">
-              <button class="share-btn" data-title="📖 سورة الطارق" data-url="audio/recitation1.mp3">
-                <i class="fab fa-whatsapp"></i> واتساب
-              </button>
-              <button class="share-btn" data-title="📖 سورة الطارق" data-url="audio/recitation1.mp3">
-                <i class="fab fa-twitter"></i> تويتر
-              </button>
-              <button class="share-btn" data-title="📖 سورة الطارق" data-url="audio/recitation1.mp3">
-                <i class="fab fa-facebook"></i> فيسبوك
-              </button>
-            </div>
-          </div>
-      
-          <!-- Recitation 2 -->
-          <div class="recitation">
-            <span>📖 سورة المطففين - الشيخ خالد الزرقاني</span>
-            <button class="play-btn" data-src="audio/recitation2.mp3">▶️ استمع</button>
-            <div class="share-btns">
-              <button class="share-btn" data-title="📖 سورة المطففين" data-url="audio/recitation2.mp3">
-                <i class="fab fa-whatsapp"></i> واتساب
-              </button>
-              <button class="share-btn" data-title="📖 سورة المطففين" data-url="audio/recitation2.mp3">
-                <i class="fab fa-twitter"></i> تويتر
-              </button>
-              <button class="share-btn" data-title="📖 سورة المطففين" data-url="audio/recitation2.mp3">
-                <i class="fab fa-facebook"></i> فيسبوك
-              </button>
-            </div>
-          </div>
-      
-          <!-- Recitation 3 -->
-          <div class="recitation">
-            <span>📖 سورة الرحمن - الشيخ خالد الزرقاني</span>
-            <button class="play-btn" data-src="audio/recitation3.mp3">▶️ استمع</button>
-            <div class="share-btns">
-              <button class="share-btn" data-title="📖 سورة الرحمن" data-url="audio/recitation3.mp3">
-                <i class="fab fa-whatsapp"></i> واتساب
-              </button>
-              <button class="share-btn" data-title="📖 سورة الرحمن" data-url="audio/recitation3.mp3">
-                <i class="fab fa-twitter"></i> تويتر
-              </button>
-              <button class="share-btn" data-title="📖 سورة الرحمن" data-url="audio/recitation3.mp3">
-                <i class="fab fa-facebook"></i> فيسبوك
-              </button>
-            </div>
-          </div>
-      
-          <!-- Recitation 4 -->
-          <div class="recitation">
-            <span>📖 سورة البروج - الشيخ خالد الزرقاني</span>
-            <button class="play-btn" data-src="audio/recitation4.mp3">▶️ استمع</button>
-            <div class="share-btns">
-              <button class="share-btn" data-title="📖 سورة البروج" data-url="audio/recitation4.mp3">
-                <i class="fab fa-whatsapp"></i> واتساب
-              </button>
-              <button class="share-btn" data-title="📖 سورة البروج" data-url="audio/recitation4.mp3">
-                <i class="fab fa-twitter"></i> تويتر
-              </button>
-              <button class="share-btn" data-title="📖 سورة البروج" data-url="audio/recitation4.mp3">
-                <i class="fab fa-facebook"></i> فيسبوك
-              </button>
-            </div>
-          </div>
-      
-          <!-- Recitation 5 -->
-          <div class="recitation">
-            <span>📖 سورة الفجر - الشيخ خالد الزرقاني</span>
-            <button class="play-btn" data-src="audio/recitation5.mp3">▶️ استمع</button>
-            <div class="share-btns">
-              <button class="share-btn" data-title="📖 سورة الفجر" data-url="audio/recitation5.mp3">
-                <i class="fab fa-whatsapp"></i> واتساب
-              </button>
-              <button class="share-btn" data-title="📖 سورة الفجر" data-url="audio/recitation5.mp3">
-                <i class="fab fa-twitter"></i> تويتر
-              </button>
-              <button class="share-btn" data-title="📖 سورة الفجر" data-url="audio/recitation5.mp3">
-                <i class="fab fa-facebook"></i> فيسبوك
-              </button>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Audio Player -->
-        <div class="audio-player">
-          <audio id="audio-player" controls>
-            <source src="" type="audio/mp3">
-            متصفحك لا يدعم تشغيل الصوت.
-          </audio>
-        </div>
-      </section>
-      
-      
 
       <section>
         <div id="athkar-section">
@@ -239,7 +134,6 @@
         </div>
       </section>
       
-      
       <section>
         <div class="section-title">
           <h2>الإعلانات والأحداث القادمة</h2>
@@ -249,7 +143,6 @@
             <h3>دورة تعليمية جديدة</h3>
             <p>
               سيتم تنظيم دورات تعليمية حول القرآن الكريم في مسجد الرحمن قريبًا.
-              
             </p>
             <span class="event-date">التاريخ: 1 مارس 2025</span>
           </div>
@@ -298,16 +191,13 @@
     </div>
 
     <footer>
-
       <p>جميع خدمات الموقع مجانية، وإذا أعجبك، فلا تنسَ الدعاء لوالديّ.</p>
       <p>© جميع الحقوق محفوظة - مسجد الرحمن غريان</p> 
-       </footer>
-       <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-       <script>
-         AOS.init();
-       </script>
-       
-       <script src="script.js"></script>
-
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script src="script.js"></script>
   </body>
 </html>
