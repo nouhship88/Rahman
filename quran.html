@@ -238,6 +238,10 @@
         font-size: 14px;
     }
     }
+    #playlist li.playing {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
   </style>
 </head>
 
@@ -264,7 +268,7 @@
       <span id="duration">0:00</span>
     </div>
     <div class="volume-control">
-      <span id="volume-icon">🔊</span>
+      <button id="mute-btn">🔊</button> <!-- Mute button -->
       <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
     </div>
     <div class="song-info">
@@ -279,109 +283,137 @@
   </div>
 
   <script>
-const audio = new Audio();
-const playlist = [
-  { title: "سورة الطارق - الشيخ خالد الزرقاني", src: "audio/recitation1.mp3" },
-  { title: "سورة المطففين - الشيخ خالد الزرقاني", src: "audio/recitation2.mp3" },
-  { title: "سورة الرحمن - الشيخ خالد الزرقاني", src: "audio/recitation3.mp3" },
-  { title: "سورة البروج - الشيخ خالد الزرقاني", src: "audio/recitation4.mp3" },
-  { title: "سورة الصف - الشيخ خالد الزرقاني", src: "audio/recitation5.mp3" },
-  { title: "سورة الكهف - الشيخ خالد الزرقاني", src: "audio/recitation6.mp3" }
-  
-];
-let currentTrackIndex = 0;
-
-const playPauseBtn = document.getElementById("play-pause-btn");
-const prevBtn = document.getElementById("prev-btn");
-const nextBtn = document.getElementById("next-btn");
-const progressBar = document.getElementById("progress-bar");
-const currentTime = document.getElementById("current-time");
-const duration = document.getElementById("duration");
-const volumeSlider = document.getElementById("volume-slider");
-const songTitle = document.getElementById("song-title");
-const playlistElement = document.getElementById("playlist");
-
-// Load playlist
-function loadPlaylist() {
-  playlistElement.innerHTML = playlist
-    .map((song, index) => `<li data-index="${index}">${song.title}</li>`)
-    .join("");
-}
-
-// Load track
-function loadTrack(index) {
-  const track = playlist[index];
-  audio.src = track.src;
-  songTitle.textContent = track.title;
-  audio.play();
-  playPauseBtn.textContent = "⏸";
-}
-
-// Update progress bar
-function updateProgress() {
-  const { currentTime: time, duration: total } = audio;
-  progressBar.value = (time / total) * 100;
-  currentTime.textContent = formatTime(time);
-  if (!isNaN(total)) duration.textContent = formatTime(total);
-}
-
-// Format time (mm:ss)
-function formatTime(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = Math.floor(time % 60);
-  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
-// Event listeners
-playPauseBtn.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play();
-    playPauseBtn.textContent = "⏸";
-  } else {
-    audio.pause();
-    playPauseBtn.textContent = "▶";
-  }
-});
-
-prevBtn.addEventListener("click", () => {
-  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-  loadTrack(currentTrackIndex);
-});
-
-nextBtn.addEventListener("click", () => {
-  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-  loadTrack(currentTrackIndex);
-});
-
-progressBar.addEventListener("input", () => {
-  const time = (progressBar.value / 100) * audio.duration;
-  audio.currentTime = time;
-});
-
-volumeSlider.addEventListener("input", () => {
-  audio.volume = volumeSlider.value;
-});
-
-playlistElement.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    currentTrackIndex = e.target.dataset.index;
+    const audio = new Audio();
+    const playlist = [
+      { title: "سورة الطارق - الشيخ خالد الزرقاني", src: "audio/recitation1.mp3" },
+      { title: "سورة المطففين - الشيخ خالد الزرقاني", src: "audio/recitation2.mp3" },
+      { title: "سورة الرحمن - الشيخ خالد الزرقاني", src: "audio/recitation3.mp3" },
+      { title: "سورة البروج - الشيخ خالد الزرقاني", src: "audio/recitation4.mp3" },
+      { title: "سورة الصف - الشيخ خالد الزرقاني", src: "audio/recitation5.mp3" },
+      { title: "سورة الكهف - الشيخ خالد الزرقاني", src: "audio/recitation6.mp3" }
+    ];
+    let currentTrackIndex = 0;
+    
+    const playPauseBtn = document.getElementById("play-pause-btn");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const progressBar = document.getElementById("progress-bar");
+    const currentTime = document.getElementById("current-time");
+    const duration = document.getElementById("duration");
+    const volumeSlider = document.getElementById("volume-slider");
+    const songTitle = document.getElementById("song-title");
+    const playlistElement = document.getElementById("playlist");
+    const muteBtn = document.getElementById("mute-btn"); // Mute button
+    
+    // Load playlist
+    function loadPlaylist() {
+      playlistElement.innerHTML = playlist
+        .map((song, index) => `<li data-index="${index}">${song.title}</li>`)
+        .join("");
+    }
+    
+    // Highlight current track
+    function highlightCurrentTrack() {
+      const playlistItems = playlistElement.getElementsByTagName("li");
+      for (let item of playlistItems) {
+        item.classList.remove("playing");
+      }
+      const currentItem = playlistElement.querySelector(`li[data-index="${currentTrackIndex}"]`);
+      currentItem.classList.add("playing");
+    }
+    
+    // Load track
+    function loadTrack(index) {
+      const track = playlist[index];
+      audio.src = track.src;
+      songTitle.textContent = track.title;
+      audio.play();
+      playPauseBtn.textContent = "⏸";
+      highlightCurrentTrack();  // Highlight the current track
+    }
+    
+    // Update progress bar
+    function updateProgress() {
+      const { currentTime: time, duration: total } = audio;
+      progressBar.value = (time / total) * 100;
+      currentTime.textContent = formatTime(time);
+      if (!isNaN(total)) duration.textContent = formatTime(total);
+    }
+    
+    // Format time (mm:ss)
+    function formatTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    }
+    
+    // Event listeners
+    playPauseBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = "⏸";
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = "▶";
+      }
+    });
+    
+    prevBtn.addEventListener("click", () => {
+      currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrackIndex);
+    });
+    
+    nextBtn.addEventListener("click", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(currentTrackIndex);
+    });
+    
+    progressBar.addEventListener("input", () => {
+      const time = (progressBar.value / 100) * audio.duration;
+      audio.currentTime = time;
+    });
+    
+    volumeSlider.addEventListener("input", () => {
+      audio.volume = volumeSlider.value;
+    });
+    
+    // Mute button functionality
+    muteBtn.addEventListener("click", () => {
+      audio.muted = !audio.muted;
+      muteBtn.textContent = audio.muted ? "🔇" : "🔊"; // Toggle mute icon
+      volumeSlider.disabled = audio.muted; // Disable volume control when muted
+    });
+    
+    // Mobile volume control fix: ensure volume value is set properly on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      if (audio) {
+        volumeSlider.value = audio.volume;
+      }
+    });
+    
+    // Playlist item click
+    playlistElement.addEventListener("click", (e) => {
+      if (e.target.tagName === "LI") {
+        currentTrackIndex = e.target.dataset.index;
+        loadTrack(currentTrackIndex);
+      }
+    });
+    
+    // Event for updating progress while audio is playing
+    audio.addEventListener("timeupdate", updateProgress);
+    
+    // When track ends, move to the next track
+    audio.addEventListener("ended", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(currentTrackIndex);
+    });
+    
+    // Initialize
+    loadPlaylist();
     loadTrack(currentTrackIndex);
-  }
-});
-
-audio.addEventListener("timeupdate", updateProgress);
-audio.addEventListener("ended", () => {
-  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-  loadTrack(currentTrackIndex);
-});
-
-// Initialize
-loadPlaylist();
-loadTrack(currentTrackIndex);
-
-   
-  </script>
-
+    </script>
+    
+    
 </main>
 <footer>
   <div class="container">
