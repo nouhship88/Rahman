@@ -1,444 +1,393 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>تلاوات قرآنية</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* Global Styles */
-      :root {
-        --primary-color: #1a472a; /* Dark Green */
-        --secondary-color: #d4af37; /* Gold */
-        --background-color: #f4f0e1; /* Soft Beige */
-        --text-color: #333;
-        --card-background: #fff;
-        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        --transition: all 0.3s ease-in-out;
-      }
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Player</title>
+   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 
-      [data-theme="dark"] {
-        --primary-color: #1a472a;
-        --secondary-color: #d4af37;
-        --background-color: #1a1a1a;
-        --text-color: #f4f4f4;
-        --card-background: #2d2d2d;
-        --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
-      }
-
-      body {
-        font-family: "Tajawal", sans-serif;
-        background-color: var(--background-color);
-        color: var(--text-color);
+  <style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
-        transition: var(--transition);
-      }
-
-      .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: var(--primary-color);
-        color: white;
-        padding: 8px;
-        z-index: 1001;
-        transition: top 0.3s;
-      }
-
-      .skip-link:focus {
-        top: 0;
-      }
-
-      header {
+        background: linear-gradient(135deg, #F9C7B2, #F4E9CD); /* Warm peach to soft beige gradient */
+        color: #333; /* Dark gray for text */
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 20px;
-        background: var(--primary-color);
-        color: white;
-        box-shadow: var(--shadow);
-      }
+    }
 
-      header h1 {
-        margin: 0;
-        font-size: 1.8rem;
+    /* Header */
+    header {
+        background-color: #FFFFFF; /* White background */
+        padding: 20px 0;
         text-align: center;
-      }
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin-bottom: 20px;
+    }
 
-      .theme-toggle {
+    header h1 {
+        font-family: 'Amiri', serif; /* Arabic calligraphy-style font */
+        font-size: 32px;
+        color: #D4AF37; /* Light gold text */
+        margin: 0;
+    }
+
+    header .home-link {
+        color: #8AAE92; /* Soft green for links */
+        text-decoration: none;
+        font-size: 18px;
+        transition: color 0.2s;
+    }
+
+    header .home-link:hover {
+        color: #D4AF37; /* Light gold on hover */
+    }
+
+    /* Main Content */
+    main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .audio-player {
+        background-color: #FFFFFF; /* White background */
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    /* Player Controls */
+    .player-controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .control-btn {
         background: none;
         border: none;
-        color: var(--secondary-color);
+        font-size: 28px;
+        color: #D4AF37; /* Light gold for buttons */
         cursor: pointer;
-        font-size: 1.5rem;
-        transition: var(--transition);
-      }
+        transition: transform 0.2s, color 0.2s;
+    }
 
-      .theme-toggle:hover {
-        opacity: 0.8;
-      }
+    .control-btn:hover {
+        transform: scale(1.2);
+        color: #8AAE92; /* Soft green on hover */
+    }
 
-      .player-container {
-        width: 100%;
-        background: var(--card-background);
-        box-shadow: var(--shadow);
-        padding: 15px;
-        /* display: flex; */
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1000;
-        /* position: fixed;
-        bottom: 0;
-        left: 0; */
-      }
-
-      .player-controls {
+    /* Progress Bar */
+    .progress-container {
         display: flex;
         align-items: center;
         gap: 10px;
-        align-content: center;
-        justify-content: center;
-        padding: 10px;
-      }
+        margin-bottom: 20px;
+    }
 
-      .player-controls button {
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 10px 15px;
+    #progress-bar {
+        flex: 1;
+        height: 5px;
+        background: #F0F0F0; /* Light gray for the track */
         border-radius: 5px;
         cursor: pointer;
-        transition: var(--transition);
+        appearance: none;
+    }
+
+    #progress-bar::-webkit-slider-thumb {
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        background: #D4AF37; /* Light gold thumb */
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    #current-time,
+    #duration {
+        font-size: 14px;
+        color: #8AAE92; /* Soft green text */
+    }
+
+    /* Volume Control */
+    .volume-control {
         display: flex;
         align-items: center;
         justify-content: center;
-      }
+        gap: 10px;
+        margin-bottom: 20px;
+    }
 
-      .player-controls button:hover {
-        background: var(--secondary-color);
-      }
+    #volume-icon {
+        font-size: 20px;
+        color: #D4AF37; /* Light gold icon */
+    }
 
-      .player-info {
-        flex-grow: 1;
-        margin: 0 20px;
-        text-align: center;
-      }
-
-      .player-info span {
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
-
-      .progress-bar {
-        width: 100%;
+    #volume-slider {
+        width: 100px;
         height: 5px;
-        background: #ddd;
-        margin-top: 10px;
-        position: relative;
-      }
-
-      .progress-bar .progress {
-        height: 100%;
-        background: var(--primary-color);
-        width: 0;
-        transition: width 0.1s;
-      }
-
-      .volume-control {
-        display: flex;
-        gap: 20px;
-        padding: 20px 20px 0;
-        /* align-items: center;
-        gap: 20px;
-margin-top: 20px;
-   */
- }
-
-      .volume-control input[type="range"] {
-        width: 80px;
-      }
-
-      .recitation-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 20px;
-        margin-bottom: 150px; /* Space for fixed player */
-      }
-
-      .recitation {
-        background: var(--card-background);
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: var(--shadow);
-        text-align: center;
-        transition: var(--transition);
-        cursor: pointer;
-      }
-
-      .recitation:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      }
-
-      .recitation.active {
-        border: 2px solid var(--secondary-color);
-      }
-
-      .recitation .share-btn {
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 8px 12px;
+        background: #F0F0F0; /* Light gray for the track */
         border-radius: 5px;
+        appearance: none;
         cursor: pointer;
-        transition: var(--transition);
-        margin-top: 10px;
-      }
+    }
 
-      .recitation .share-btn:hover {
-        background: var(--secondary-color);
-      }
+    #volume-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        background: #D4AF37; /* Light gold thumb */
+        border-radius: 50%;
+        cursor: pointer;
+    }
 
-      audio {
-        display: none; /* Hide the default audio player */
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Skip to Content Link -->
-    <a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+    /* Song Info */
+    .song-info {
+        margin: 20px 0;
+    }
 
+    #song-title {
+        font-family: 'Amiri', serif; /* Arabic calligraphy-style font */
+        font-size: 24px;
+        color: #8AAE92; /* Soft green text */
+    }
+
+    /* Playlist */
+    .playlist {
+        margin-top: 20px;
+    }
+
+    .playlist h3 {
+        font-size: 18px;
+        color: #D4AF37; /* Light gold text */
+        margin-bottom: 10px;
+    }
+
+    .playlist ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .playlist li {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #F0F0F0; /* Light gray border */
+        transition: background-color 0.2s;
+    }
+
+    .playlist li:hover {
+        background-color: rgba(212, 175, 55, 0.1); /* Light gold hover */
+    }
+
+    /* Footer */
+    footer {
+        background-color: #FFFFFF;
+        padding: 0px 0;
+        text-align: center;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    footer p {
+        margin: 0;
+        font-size: 18px;
+        color: #8AAE92; /* Soft green text */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 24px;
+        }
+
+        .audio-player {
+            width: 90%;
+            padding: 15px;
+        }
+
+        .control-btn {
+            font-size: 24px;
+        }
+
+        #song-title {
+            font-size: 20px;
+        }
+
+        .playlist h3 {
+            font-size: 16px;
+        }
+
+        footer p {
+        font-size: 14px;
+    }
+    }
+  </style>
+</head>
+
+
+<body>
     <header>
-      <h1>🎙️ تلاوات قرآنية من مسجد الرحمن</h1>
-
-    </header>
-    <a href="index.html" style="color: #4c9411; display:flex; justify-content: center; ">العودة إلى الصفحة الرئيسية</a>
-
-
-
-    <!-- Fixed Audio Player -->
-    <div class="player-container" role="region" aria-label="مشغل الصوت">
-      <div class="player-controls">
-        <button id="prev-btn" aria-label="السابق">
-          <i class="fas fa-backward"></i>السابق
-        </button>
-        <button id="play-btn" aria-label="تشغيل">
-          <i class="fas fa-play"></i>
-        </button>
-        <button id="next-btn" aria-label="التالي">التالي
-          <i class="fas fa-forward"></i>
-        </button>
-      </div>
-      <div class="player-info">
-        <span id="current-title">اختر تلاوة</span>
-        <div
-          class="progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          <div class="progress"></div>
+        <div class="container">
+          <h1>🎙️ تلاوات قرآنية من مسجد الرحمن</h1>
+          <nav>
+            <a href="index.html" class="home-link">العودة إلى الصفحة الرئيسية</a>
+          </nav>
         </div>
-      </div>
-      <div class="volume-control">
-        <button id="mute-btn" aria-label="كتم الصوت">
-          <i class="fas fa-volume-up"></i>
-        </button>
-        <input
-          type="range"
-          id="volume-slider"
-          min="0"
-          max="1"
-          step="0.1"
-          value="1"
-          aria-label="تحكم في مستوى الصوت"
-        />
-      </div>
-      <audio id="audio-player"></audio>
+      </header>
+      <main>
+  <div class="audio-player">
+    <div class="player-controls">
+      <button id="prev-btn" class="control-btn">⏮</button>
+      <button id="play-pause-btn" class="control-btn">▶</button>
+      <button id="next-btn" class="control-btn">⏭</button>
     </div>
+    <div class="progress-container">
+      <span id="current-time">0:00</span>
+      <input type="range" id="progress-bar" value="0">
+      <span id="duration">0:00</span>
+    </div>
+    <div class="volume-control">
+      <span id="volume-icon">🔊</span>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+    </div>
+    <div class="song-info">
+      <h2 id="song-title">No Song Playing</h2>
+    </div>
+    <div class="playlist">
+      <h3>قائمة التشغيل</h3>
+      <ul id="playlist">
+        <!-- Playlist items will be dynamically added here -->
+      </ul>
+    </div>
+  </div>
 
-    <!-- Recitation List -->
-    <main id="main-content">
-      <div class="recitation-list" id="recitation-list"></div>
-    </main>
+  <script>
+const audio = new Audio();
+const playlist = [
+  { title: "سورة الطارق - الشيخ خالد الزرقاني", src: "audio/recitation1.mp3" },
+  { title: "سورة المطففين - الشيخ خالد الزرقاني", src: "audio/recitation2.mp3" },
+  { title: "سورة الرحمن - الشيخ خالد الزرقاني", src: "audio/recitation3.mp3" },
+  { title: "سورة البروج - الشيخ خالد الزرقاني", src: "audio/recitation4.mp3" },
+  { title: "سورة الصف - الشيخ خالد الزرقاني", src: "audio/recitation5.mp3" },
+  { title: "سورة الكهف - الشيخ خالد الزرقاني", src: "audio/recitation6.mp3" }
+  
+];
+let currentTrackIndex = 0;
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const recitations = [
-          {
-            title: "سورة الطارق",
-            reciter: "الشيخ خالد الزرقاني",
-            src: "audio/recitation1.mp3",
-          },
-          {
-            title: "سورة المطففين",
-            reciter: "الشيخ خالد الزرقاني",
-            src: "audio/recitation2.mp3",
-          },
-          {
-            title: "سورة الرحمن",
-            reciter: "الشيخ خالد الزرقاني",
-            src: "audio/recitation3.mp3",
-          },
-          {
-            title: "سورة البروج",
-            reciter: "الشيخ خالد الزرقاني",
-            src: "audio/recitation4.mp3",
-          },
-          {
-            title: "سورة الصف ",
-            reciter: "الشيخ خالد الزرقاني",
-            src: "audio/recitation5.mp3",
-          }, 
-          {
-            title: "سورة الكهف  ",
-            reciter: "الشيخ خالد الزرقاني",
-            src: "audio/recitation6.mp3",
-          },
-        ];
+const playPauseBtn = document.getElementById("play-pause-btn");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const progressBar = document.getElementById("progress-bar");
+const currentTime = document.getElementById("current-time");
+const duration = document.getElementById("duration");
+const volumeSlider = document.getElementById("volume-slider");
+const songTitle = document.getElementById("song-title");
+const playlistElement = document.getElementById("playlist");
 
-        const recitationList = document.getElementById("recitation-list");
-        const audioPlayer = document.getElementById("audio-player");
-        const playBtn = document.getElementById("play-btn");
-        const prevBtn = document.getElementById("prev-btn");
-        const nextBtn = document.getElementById("next-btn");
-        const currentTitle = document.getElementById("current-title");
-        const themeToggle = document.getElementById("theme-toggle");
-        const progressBar = document.querySelector(".progress-bar .progress");
-        const volumeSlider = document.getElementById("volume-slider");
-        const muteBtn = document.getElementById("mute-btn");
-        let currentIndex = 0;
-        let isMuted = false;
+// Load playlist
+function loadPlaylist() {
+  playlistElement.innerHTML = playlist
+    .map((song, index) => `<li data-index="${index}">${song.title}</li>`)
+    .join("");
+}
 
-        // Load a recitation by index
-        function loadRecitation(index) {
-          currentIndex = index;
-          audioPlayer.src = recitations[index].src;
-          currentTitle.textContent = `${recitations[index].title} - ${recitations[index].reciter}`;
-          updateActiveRecitation();
-          audioPlayer.play();
-          playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        }
+// Load track
+function loadTrack(index) {
+  const track = playlist[index];
+  audio.src = track.src;
+  songTitle.textContent = track.title;
+  audio.play();
+  playPauseBtn.textContent = "⏸";
+}
 
-        // Update the active recitation style
-        function updateActiveRecitation() {
-          document
-            .querySelectorAll(".recitation")
-            .forEach((recitation, index) => {
-              if (index === currentIndex) {
-                recitation.classList.add("active");
-              } else {
-                recitation.classList.remove("active");
-              }
-            });
-        }
+// Update progress bar
+function updateProgress() {
+  const { currentTime: time, duration: total } = audio;
+  progressBar.value = (time / total) * 100;
+  currentTime.textContent = formatTime(time);
+  if (!isNaN(total)) duration.textContent = formatTime(total);
+}
 
-        // Render recitations
-        recitations.forEach((recitation, index) => {
-          const recitationDiv = document.createElement("div");
-          recitationDiv.classList.add("recitation");
-          recitationDiv.setAttribute("role", "button");
-          recitationDiv.setAttribute("tabindex", "0");
-          recitationDiv.innerHTML = `
-                    <span>${recitation.title} - ${recitation.reciter}</span>
-                    <button class="share-btn" data-title="${recitation.title}" data-reciter="${recitation.reciter}" aria-label="مشاركة ${recitation.title}">
-                        <i class="fab fa-whatsapp"></i> مشاركة
-                    </button>
-                `;
-          recitationDiv.addEventListener("click", function () {
-            loadRecitation(index);
-          });
-          recitationDiv.addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === " ") {
-              loadRecitation(index);
-            }
-          });
-          recitationList.appendChild(recitationDiv);
-        });
+// Format time (mm:ss)
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
 
-        // Play/Pause button
-        playBtn.addEventListener("click", function () {
-          if (audioPlayer.paused) {
-            audioPlayer.play();
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-          } else {
-            audioPlayer.pause();
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-          }
-        });
+// Event listeners
+playPauseBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseBtn.textContent = "⏸";
+  } else {
+    audio.pause();
+    playPauseBtn.textContent = "▶";
+  }
+});
 
-        // Previous button
-        prevBtn.addEventListener("click", function () {
-          if (currentIndex > 0) {
-            loadRecitation(currentIndex - 1);
-          }
-        });
+prevBtn.addEventListener("click", () => {
+  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+  loadTrack(currentTrackIndex);
+});
 
-        // Next button
-        nextBtn.addEventListener("click", function () {
-          if (currentIndex < recitations.length - 1) {
-            loadRecitation(currentIndex + 1);
-          }
-        });
+nextBtn.addEventListener("click", () => {
+  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  loadTrack(currentTrackIndex);
+});
 
-        // Automatically play the next recitation
-        audioPlayer.addEventListener("ended", function () {
-          if (currentIndex < recitations.length - 1) {
-            loadRecitation(currentIndex + 1);
-          }
-        });
+progressBar.addEventListener("input", () => {
+  const time = (progressBar.value / 100) * audio.duration;
+  audio.currentTime = time;
+});
 
-        // Update progress bar
-        audioPlayer.addEventListener("timeupdate", function () {
-          const progress =
-            (audioPlayer.currentTime / audioPlayer.duration) * 100;
-          progressBar.style.width = `${progress}%`;
-        });
+volumeSlider.addEventListener("input", () => {
+  audio.volume = volumeSlider.value;
+});
 
-        // Volume control
-        volumeSlider.addEventListener("input", function () {
-          audioPlayer.volume = this.value;
-          if (isMuted) {
-            isMuted = false;
-            muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-          }
-        });
+playlistElement.addEventListener("click", (e) => {
+  if (e.target.tagName === "LI") {
+    currentTrackIndex = e.target.dataset.index;
+    loadTrack(currentTrackIndex);
+  }
+});
 
-        // Mute button
-        muteBtn.addEventListener("click", function () {
-          isMuted = !isMuted;
-          audioPlayer.muted = isMuted;
-          muteBtn.innerHTML = isMuted
-            ? '<i class="fas fa-volume-mute"></i>'
-            : '<i class="fas fa-volume-up"></i>';
-        });
+audio.addEventListener("timeupdate", updateProgress);
+audio.addEventListener("ended", () => {
+  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  loadTrack(currentTrackIndex);
+});
 
-        // WhatsApp share button
-        document.querySelectorAll(".share-btn").forEach((button) => {
-          button.addEventListener("click", function (e) {
-            e.stopPropagation(); // Prevent triggering the parent div's click event
-            const title = this.getAttribute("data-title");
-            const reciter = this.getAttribute("data-reciter");
-            const url = window.location.href;
-            const message = `استمع إلى "${title}" بصوت ${reciter}:\n${url}`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
-              message
-            )}`;
-            window.open(whatsappUrl, "_blank");
-          });
-        });
+// Initialize
+loadPlaylist();
+loadTrack(currentTrackIndex);
 
-      
-      });
-    </script>
-  </body>
+   
+  </script>
+
+</main>
+<footer>
+  <div class="container">
+      <p>© جميع الحقوق محفوظة - مسجد الرحمن غريان</p> 
+  </div>
+</footer>
+</body>
+
 </html>
