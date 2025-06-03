@@ -1,55 +1,59 @@
-const apiKey = '57a90be8cde9f71447e17cb16a34739a'; // Replace this with your actual API key
-const cityName = 'غريان'; // Set your city in Arabic
+const apiKey = "57a90be8cde9f71447e17cb16a34739a"; // Replace this with your actual API key
+const cityName = "غريان"; // Set your city in Arabic
 const lat = 32.171912762742345; // Latitude for Gharyan
 const lon = 13.030128070524592; // Longitude for Gharyan
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric&lang=ar`; // Set lang=ar for Arabic descriptions
 
 fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
     // Set the title dynamically with city name
-    document.getElementById('city-name').innerText = `طقس  ${data.name}`; // This will show "الطقس في غريان"
-    
+    document.getElementById("city-name").innerText = `طقس  ${data.name}`; // This will show "الطقس في غريان"
+
     // Populate weather data
-    document.getElementById('temperature').innerText = data.main.temp;
-    document.getElementById('feels-like').innerText = data.main.feels_like;
+    document.getElementById("temperature").innerText = data.main.temp;
+    document.getElementById("feels-like").innerText = data.main.feels_like;
     // document.getElementById('wind').innerText = data.wind.speed;
-    document.getElementById('humidity').innerText = data.main.humidity;
-    document.getElementById('description').innerText = data.weather[0].description; // This will show the description in Arabic
+    document.getElementById("humidity").innerText = data.main.humidity;
+    document.getElementById("description").innerText =
+      data.weather[0].description; // This will show the description in Arabic
   })
-  .catch(error => {
-    console.error('Error fetching data:', error);
+  .catch((error) => {
+    console.error("Error fetching data:", error);
   });
-
-
 
 // Ramadan Countdown Script
 function updateRamadanCountdown() {
-  const ramadanStart = new Date("2025-03-01T00:00:00"); // Adjust for your region's Ramadan start date
+  const ramadanStart = new Date("2026-02-17T00:00:00"); // Adjust for your region's Ramadan start date
   const now = new Date();
   const remainingTime = ramadanStart - now;
 
-  if (remainingTime >0) {
+  if (remainingTime > 0) {
     const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+    const hours = Math.floor(
+      (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+    );
     const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
     // Update Countdown Timer
-    document.querySelector('.days').textContent = `${days}`;
-    document.querySelector('.hours').textContent = `${hours}`;
-    document.querySelector('.minutes').textContent = `${minutes}`;
-    document.querySelector('.seconds').textContent = `${seconds}`;
+    document.querySelector(".days").textContent = `${days}`;
+    document.querySelector(".hours").textContent = `${hours}`;
+    document.querySelector(".minutes").textContent = `${minutes}`;
+    document.querySelector(".seconds").textContent = `${seconds}`;
 
     // Calculate progress percentage
     const totalDuration = ramadanStart - new Date("2024-03-01T00:00:00"); // Time from last Ramadan start to current Ramadan start
-    const progressPercentage = ((totalDuration - remainingTime) / totalDuration) * 100;
+    const progressPercentage =
+      ((totalDuration - remainingTime) / totalDuration) * 100;
 
     // Update Progress Bar
     document.getElementById("progress").style.width = `${progressPercentage}%`;
-
   } else {
-    document.getElementById("countdown").innerHTML = "رمضان قد بدأ - مبارك عليكم رمضان <br> قد جاءكم شهر رمضان شهر مبارك، كتب الله عليكم صيامه، فيه تفتح أبواب الجنة وتغلق فيه أبواب الجحيم، وتغل فيه الشياطين، فيه ليلة خير من ألف شهر، من حرم خيرها فقد حرم";
+    document.getElementById("countdown").innerHTML =
+      "رمضان قد بدأ - مبارك عليكم رمضان <br> قد جاءكم شهر رمضان شهر مبارك، كتب الله عليكم صيامه، فيه تفتح أبواب الجنة وتغلق فيه أبواب الجحيم، وتغل فيه الشياطين، فيه ليلة خير من ألف شهر، من حرم خيرها فقد حرم";
     document.getElementById("progress").style.width = "100%"; // Full when Ramadan starts
     document.getElementById("doa").style.display = "none"; // Hides the element
   }
@@ -60,62 +64,61 @@ document.addEventListener("DOMContentLoaded", function () {
   updateRamadanCountdown(); // Call on page load
   setInterval(updateRamadanCountdown, 1000); // Update every second
 });
- 
+
 // Array of Islamic quotes in Arabic (Hadiths and Quran verses)
 const quotes = [
   {
     text: "إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّى يُغَيِّرُوا مَا بِأَنْفُسِهِمْ",
-    source: "القرآن الكريم 13:11"
+    source: "القرآن الكريم 13:11",
   },
   {
     text: "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
-    source: "صحيح البخاري"
+    source: "صحيح البخاري",
   },
   {
     text: "وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِنْ مُدَّكِرٍ",
-    source: "القرآن الكريم 54:17"
+    source: "القرآن الكريم 54:17",
   },
   {
     text: "الرَّاحِمُونَ يَرْحَمُهُمُ الرَّحْمَنُ، ارْحَمُوا مَنْ فِي الْأَرْضِ يَرْحَمْكُمْ مَنْ فِي السَّمَاءِ",
-    source: "صحيح الترمذي"
+    source: "صحيح الترمذي",
   },
   {
     text: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",
-    source: "القرآن الكريم 2:286"
+    source: "القرآن الكريم 2:286",
   },
   {
     text: "الْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اللَّهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ، وَفِي كُلٍّ خَيْرٌ",
-    source: "صحيح مسلم"
+    source: "صحيح مسلم",
   },
   {
     text: "وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ",
-    source: "القرآن الكريم 65:2-3"
+    source: "القرآن الكريم 65:2-3",
   },
   {
     text: "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
-    source: "القرآن الكريم - سورة الرعد (13:28)"
+    source: "القرآن الكريم - سورة الرعد (13:28)",
   },
   {
     text: "وَمَنْ أَعْرَضَ عَن ذِكْرِي فَإِنَّ لَهُ مَعِيشَةً ضَنكًا وَنَحْشُرُهُ يَوْمَ الْقِيَامَةِ أَعْمَىٰ",
-    source: "القرآن الكريم - سورة طه (20:124)"
+    source: "القرآن الكريم - سورة طه (20:124)",
   },
   {
     text: "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ",
-    source: "القرآن الكريم - سورة الزمر (39:10)"
+    source: "القرآن الكريم - سورة الزمر (39:10)",
   },
   {
     text: "وَلَنَبْلُوَنَّكُم بِشَيْءٍ مِّنَ الْخَوْفِ وَالْجُوعِ وَنَقْصٍ مِّنَ الْأَمْوَالِ وَالْأَنفُسِ وَالثَّمَرَاتِ ۗ وَبَشِّرِ الصَّابِرِينَ",
-    source: "القرآن الكريم - سورة البقرة (2:155)"
+    source: "القرآن الكريم - سورة البقرة (2:155)",
   },
   {
     text: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
-    source: "القرآن الكريم - سورة البقرة (2:250)"
+    source: "القرآن الكريم - سورة البقرة (2:250)",
   },
   {
     text: "وَلَا تَحْسَبَنَّ اللَّهَ غَافِلًا عَمَّا يَعْمَلُ الظَّالِمُونَ ۚ إِنَّمَا يُؤَخِّرُهُمْ لِيَوْمٍ تَشْخَصُ فِيهِ الْأَبْصَارُ",
-    source: "القرآن الكريم - سورة إبراهيم (14:42)"
-  }
-  
+    source: "القرآن الكريم - سورة إبراهيم (14:42)",
+  },
 ];
 
 // Function to get a random quote
@@ -127,8 +130,8 @@ function getRandomQuote() {
 // Display the quote
 function displayQuote() {
   const quote = getRandomQuote();
-  document.getElementById('quote-text').textContent = quote.text;
-  document.getElementById('quote-source').textContent = `— ${quote.source}`;
+  document.getElementById("quote-text").textContent = quote.text;
+  document.getElementById("quote-source").textContent = `— ${quote.source}`;
 }
 
 // Run on page load
@@ -156,30 +159,32 @@ const athkarEvening = [
 function displayAthkar() {
   const now = new Date();
   const hour = now.getHours();
-  
+
   let athkar, virtuesText;
 
   // Morning (before 12 PM)
   if (hour < 12) {
     athkar = athkarMorning;
-    virtuesText = "أذكار الصباح تعمل على تقوية الإيمان وتجلب البركة وتحفظ المسلم طوال اليوم.";
+    virtuesText =
+      "أذكار الصباح تعمل على تقوية الإيمان وتجلب البركة وتحفظ المسلم طوال اليوم.";
   }
   // Evening (after 12 PM)
   else {
     athkar = athkarEvening;
-    virtuesText = "أذكار المساء تحفظ المسلم من الشر وتفتح له أبواب الرحمة والمغفرة.";
+    virtuesText =
+      "أذكار المساء تحفظ المسلم من الشر وتفتح له أبواب الرحمة والمغفرة.";
   }
 
   // Update the HTML with the correct athkar and virtues
-  const athkarContainer = document.getElementById('athkar');
-  athkarContainer.innerHTML = '';
-  athkar.forEach(item => {
-    const athkarItem = document.createElement('p');
+  const athkarContainer = document.getElementById("athkar");
+  athkarContainer.innerHTML = "";
+  athkar.forEach((item) => {
+    const athkarItem = document.createElement("p");
     athkarItem.textContent = item.text;
     athkarContainer.appendChild(athkarItem);
   });
 
-  const virtuesContainer = document.getElementById('virtues-text');
+  const virtuesContainer = document.getElementById("virtues-text");
   virtuesContainer.textContent = virtuesText;
 }
 
@@ -189,14 +194,33 @@ displayAthkar();
 // Update the athkar every minute to ensure it reflects the correct time
 setInterval(displayAthkar, 60000);
 
-
 document.addEventListener("DOMContentLoaded", function () {
   const recitations = [
-      { title: "سورة الطارق", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation1.mp3" },
-      { title: "سورة المطففين", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation2.mp3" },
-      { title: "سورة الرحمن", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation3.mp3" },
-      { title: "سورة البروج", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation4.mp3" },
-      { title: "سورة الفجر", reciter: "الشيخ خالد الزرقاني", src: "audio/recitation5.mp3" }
+    {
+      title: "سورة الطارق",
+      reciter: "الشيخ خالد الزرقاني",
+      src: "audio/recitation1.mp3",
+    },
+    {
+      title: "سورة المطففين",
+      reciter: "الشيخ خالد الزرقاني",
+      src: "audio/recitation2.mp3",
+    },
+    {
+      title: "سورة الرحمن",
+      reciter: "الشيخ خالد الزرقاني",
+      src: "audio/recitation3.mp3",
+    },
+    {
+      title: "سورة البروج",
+      reciter: "الشيخ خالد الزرقاني",
+      src: "audio/recitation4.mp3",
+    },
+    {
+      title: "سورة الفجر",
+      reciter: "الشيخ خالد الزرقاني",
+      src: "audio/recitation5.mp3",
+    },
   ];
 
   const recitationList = document.getElementById("recitation-list");
@@ -210,97 +234,99 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Load a recitation by index
   function loadRecitation(index) {
-      currentIndex = index;
-      audioPlayer.src = recitations[index].src;
-      currentTitle.textContent = `${recitations[index].title} - ${recitations[index].reciter}`;
-      updateActiveRecitation();
-      audioPlayer.play();
-      playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    currentIndex = index;
+    audioPlayer.src = recitations[index].src;
+    currentTitle.textContent = `${recitations[index].title} - ${recitations[index].reciter}`;
+    updateActiveRecitation();
+    audioPlayer.play();
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
   }
 
   // Update the active recitation style
   function updateActiveRecitation() {
-      document.querySelectorAll(".recitation").forEach((recitation, index) => {
-          if (index === currentIndex) {
-              recitation.classList.add("active");
-          } else {
-              recitation.classList.remove("active");
-          }
-      });
+    document.querySelectorAll(".recitation").forEach((recitation, index) => {
+      if (index === currentIndex) {
+        recitation.classList.add("active");
+      } else {
+        recitation.classList.remove("active");
+      }
+    });
   }
 
   // Render recitations
   recitations.forEach((recitation, index) => {
-      const recitationDiv = document.createElement("div");
-      recitationDiv.classList.add("recitation");
-      recitationDiv.innerHTML = `
+    const recitationDiv = document.createElement("div");
+    recitationDiv.classList.add("recitation");
+    recitationDiv.innerHTML = `
           <span>${recitation.title} - ${recitation.reciter}</span>
           <button class="share-btn" data-title="${recitation.title}" data-reciter="${recitation.reciter}">
               <i class="fab fa-whatsapp"></i> مشاركة
           </button>
       `;
-      recitationDiv.addEventListener("click", function () {
-          loadRecitation(index);
-      });
-      recitationList.appendChild(recitationDiv);
+    recitationDiv.addEventListener("click", function () {
+      loadRecitation(index);
+    });
+    recitationList.appendChild(recitationDiv);
   });
 
   // Play/Pause button
   playBtn.addEventListener("click", function () {
-      if (audioPlayer.paused) {
-          audioPlayer.play();
-          playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      } else {
-          audioPlayer.pause();
-          playBtn.innerHTML = '<i class="fas fa-play"></i>';
-      }
+    if (audioPlayer.paused) {
+      audioPlayer.play();
+      playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      audioPlayer.pause();
+      playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
   });
 
   // Previous button
   prevBtn.addEventListener("click", function () {
-      if (currentIndex > 0) {
-          loadRecitation(currentIndex - 1);
-      }
+    if (currentIndex > 0) {
+      loadRecitation(currentIndex - 1);
+    }
   });
 
   // Next button
   nextBtn.addEventListener("click", function () {
-      if (currentIndex < recitations.length - 1) {
-          loadRecitation(currentIndex + 1);
-      }
+    if (currentIndex < recitations.length - 1) {
+      loadRecitation(currentIndex + 1);
+    }
   });
 
   // Automatically play the next recitation
   audioPlayer.addEventListener("ended", function () {
-      if (currentIndex < recitations.length - 1) {
-          loadRecitation(currentIndex + 1);
-      }
+    if (currentIndex < recitations.length - 1) {
+      loadRecitation(currentIndex + 1);
+    }
   });
 
   // WhatsApp share button
-  document.querySelectorAll(".share-btn").forEach(button => {
-      button.addEventListener("click", function (e) {
-          e.stopPropagation(); // Prevent triggering the parent div's click event
-          const title = this.getAttribute("data-title");
-          const reciter = this.getAttribute("data-reciter");
-          const url = window.location.href;
-          const message = `استمع إلى "${title}" بصوت ${reciter}:\n${url}`;
-          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-          window.open(whatsappUrl, "_blank");
-      });
+  document.querySelectorAll(".share-btn").forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.stopPropagation(); // Prevent triggering the parent div's click event
+      const title = this.getAttribute("data-title");
+      const reciter = this.getAttribute("data-reciter");
+      const url = window.location.href;
+      const message = `استمع إلى "${title}" بصوت ${reciter}:\n${url}`;
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+    });
   });
 
   // Dark/Light mode toggle
   themeToggle.addEventListener("click", function () {
-      document.body.classList.toggle("dark-mode");
-      const isDarkMode = document.body.classList.contains("dark-mode");
-      localStorage.setItem("darkMode", isDarkMode);
-      themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    document.body.classList.toggle("dark-mode");
+    const isDarkMode = document.body.classList.contains("dark-mode");
+    localStorage.setItem("darkMode", isDarkMode);
+    themeToggle.innerHTML = isDarkMode
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
   });
 
   // Check for saved dark mode preference
   if (localStorage.getItem("darkMode") === "true") {
-      document.body.classList.add("dark-mode");
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    document.body.classList.add("dark-mode");
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
   }
 });
